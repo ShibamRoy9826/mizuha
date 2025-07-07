@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #cdd6f4;
+  --fg: #11111b;
+  --tint: rgba(0,0,0,0.1);
+  --tint-strong: rgba(0,0,0,0.4);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+  --bg: #11111b;
+  --fg: #ededed;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Arial, Helvetica, sans-serif;
+}
