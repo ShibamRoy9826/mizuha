@@ -5,6 +5,7 @@
   --fg: #11111b;
   --tint: rgba(0,0,0,0.1);
   --tint-strong: rgba(0,0,0,0.4);
+  --tint-strongest: rgba(0,0,0,0.6);
 }
 
 @theme inline {

@@ -7,8 +7,9 @@ function Bg(){
             muted
             loop
             playsInline
+            disablePictureInPicture
             >
-            <source src="/videos/evening-chill.mp4" type="video/mp4"/>
+            <source src="/videos/cozy-room.mp4" type="video/mp4"/>
             Your browser does not support the video tag.
             </video> 
         </div>

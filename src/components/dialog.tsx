@@ -5,7 +5,7 @@ interface Props{
     id:string,
     visibleWindow:string|null,
     title:string,
-    innerContent:React.ReactNode,
+    children:React.ReactNode,
     positionX?:number,
     positionY?:number,
     width:string,
@@ -14,12 +14,8 @@ interface Props{
 }
 
 
-export default function Dialog({id,closeFunc,visibleWindow,title,innerContent,positionX,positionY,width,height}:Props){
-
-    if(visibleWindow!==id){
-        return null;
-    }
-
+export default function Dialog({id,closeFunc,visibleWindow,title,children,positionX,positionY,width,height}:Props){
+    const isVisible=(visibleWindow==id);
     const dialogRef=useRef<HTMLDivElement>(null);
     const [pos, setPos] = useState({x:positionX,y:positionY});
     const [dragging, setDragging] = useState(false);
@@ -65,7 +61,7 @@ export default function Dialog({id,closeFunc,visibleWindow,title,innerContent,po
     }
 
     return (
-        <div ref={dialogRef} className={`w-${width} h-${height} rounded-xl backdrop-blur-sm border-1 border-[rgba(255,255,255,0.2)]  flex absolute z-3 bg-[var(--tint-strong)] shadow-lg`} style={{left:pos.x,top:pos.y}}>
+        <div ref={dialogRef} className="rounded-xl backdrop-blur-sm border-1 border-[rgba(255,255,255,0.2)]  flex absolute z-3 bg-[var(--tint-strong)] hover:bg-[var(--tint-strongest)] shadow-lg transition-colors duration-500 ease-in-out" style={{display: isVisible?"flex":"none",width:width,height:height,left:pos.x,top:pos.y}}>
             <div className="relative w-full flex flex-col items-center justify-center">
 
                 {/* titlebar */}
@@ -78,7 +74,7 @@ export default function Dialog({id,closeFunc,visibleWindow,title,innerContent,po
 
                 {/* main content */}
                 <div className="w-full h-full p-8">
-                    {innerContent}
+                    {children}
                 </div>
             </div>
 
