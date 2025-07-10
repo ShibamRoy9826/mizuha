@@ -39,6 +39,7 @@ export default function Clock(){
     return(
         <div className={` ${silkscreen.className} absolute top-8 left-1/2 -translate-x-1/2 rounded-xl flex items-center justify-center  w-auto text-8xl p-4 text-center gap-[2px] select-none bg-[var(--tint)]`}>
             <span className="backdrop-blur-sm shadow-xl rounded-xl border-x-2 border-x-[rgba(0,0,0,0.1)]">{hours}</span>
+            <span>:</span>
             <span className="backdrop-blur-sm shadow-xl rounded-xl border-x-2 border-x-[rgba(0,0,0,0.1)]">{minutes}</span>
             <span className="backdrop-blur-sm shadow-xl rounded-xl border-x-2 border-x-[rgba(0,0,0,0.1)]">{ampm}</span>
 

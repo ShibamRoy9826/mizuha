@@ -30,7 +30,6 @@ export default function RootLayout({
       <body
         className={`${exo2.variable} ${exo2.className} antialiased w-[100vw] h-[100vh] overflow-hidden`}
       >
-        <Bg></Bg>
         {children}
       </body>
     </html>

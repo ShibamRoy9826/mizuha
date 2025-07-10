@@ -3,6 +3,7 @@
 :root {
   --bg: #cdd6f4;
   --fg: #11111b;
+  --primary: rgba(255,255,255,0.2);
   --tint: rgba(0,0,0,0.1);
   --tint-strong: rgba(0,0,0,0.4);
   --tint-strongest: rgba(0,0,0,0.6);

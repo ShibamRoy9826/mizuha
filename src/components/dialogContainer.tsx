@@ -1,5 +1,7 @@
 "use client";
 import Dialog from "@/components/dialog";
+import WallButton from "./wallButton";
+import {useEffect, useState} from "react";
 
 interface Props{
     dialogName:string|null,
@@ -9,28 +11,65 @@ interface Props{
     toggleEye:()=>void,
     toggleTodo:()=>void,
     toggleJournal:()=>void,
-
+    onChange:()=>void,
+    posArray:{"settings":number[],"eye":number[],"todo":number[],"journal":number[],"pomo":number[],"bg":number[]}
 }
 
-export default function DialogContainer({dialogName,toggleBg,togglePomodoro,toggleSettings,toggleEye, toggleTodo,toggleJournal}:Props){
+export default function DialogContainer({posArray,onChange,dialogName,toggleBg,togglePomodoro,toggleSettings,toggleEye, toggleTodo,toggleJournal}:Props){
+
+    const [wallName,setWall]=useState("videos/cozy-room.mp4");
+    
+    useEffect(()=>{
+        if(wallName!==""){
+            localStorage.setItem("wallSource",wallName);
+            // console.log("wallpaper changed to:",wallName);
+            onChange();
+        }else{
+            let w=localStorage.getItem("wallSource");
+            if(w){
+                setWall(w);
+                onChange();
+        }else{
+                // console.log("wallpaper changed to:",wallName);
+            }
+        }
+    },[wallName])
+
 
     return (
     <>
-
         {/*Bottom bar dialogs -----------------------------------*/}
         <Dialog
         id="bg"
         visibleWindow={dialogName}
         title="Backgrounds"
-        width="auto"
-        height="auto"
+        width="40vw"
+        height="50vh"
         closeFunc={toggleBg}
-        positionX={1300}
-        positionY={400}
+        positionX={posArray['bg'][0]}
+        positionY={posArray['bg'][1]}
+        useHW={true}
         >
-        <h1>
-            This is gonna contain all the backgrounds
-        </h1>
+            <div className="w-full h-full grid grid-cols-4 gap-4 overflow-y-scroll">
+                <WallButton
+                name="Cozy room"
+                source="/wall-thumbnails/cozy-room.jpg"
+                current={wallName}
+                onClick={()=>{setWall("/videos/cozy-room.mp4")}}
+                />
+                <WallButton
+                name="Evening Chill"
+                source="/wall-thumbnails/evening-chill.jpg"
+                current={wallName}
+                onClick={()=>{setWall("/videos/evening-chill.mp4")}}
+                />
+                <WallButton
+                name="Retro room"
+                source="/wall-thumbnails/retro-room.jpg"
+                current={wallName}
+                onClick={()=>{setWall("/videos/retro-room.mp4")}}
+                />
+            </div>
         </Dialog>
 
 
@@ -43,8 +82,8 @@ export default function DialogContainer({dialogName,toggleBg,togglePomodoro,togg
         width="auto"
         height="auto"
         closeFunc={toggleSettings}
-        positionX={80}
-        positionY={200}
+        positionX={posArray['settings'][0]+60}
+        positionY={posArray['settings'][1]}
         >
         <h1>
             This is the dialog box for settings
@@ -59,8 +98,8 @@ export default function DialogContainer({dialogName,toggleBg,togglePomodoro,togg
         width="auto"
         height="auto"
         closeFunc={togglePomodoro}
-        positionX={80}
-        positionY={250}
+        positionX={posArray['pomo'][0]+60}
+        positionY={posArray['pomo'][1]}
         >
         <h1>
             This is the dialog box for the pomodoro timer
@@ -76,8 +115,8 @@ export default function DialogContainer({dialogName,toggleBg,togglePomodoro,togg
         width="auto"
         height="auto"
         closeFunc={toggleEye}
-        positionX={80}
-        positionY={300}
+        positionX={posArray['eye'][0]+60}
+        positionY={posArray['eye'][1]}
         >
         <h1>
             This is the dialog box for the 20-20-20 rule timer
@@ -91,8 +130,8 @@ export default function DialogContainer({dialogName,toggleBg,togglePomodoro,togg
         width="auto"
         height="auto"
         closeFunc={toggleTodo}
-        positionX={80}
-        positionY={350}
+        positionX={posArray['todo'][0]+60}
+        positionY={posArray['todo'][1]}
         >
         <h1>
             This is the dialog box for the Todo list 
@@ -106,8 +145,8 @@ export default function DialogContainer({dialogName,toggleBg,togglePomodoro,togg
         width="auto"
         height="auto"
         closeFunc={toggleJournal}
-        positionX={80}
-        positionY={400}
+        positionX={posArray['journal'][0]+60}
+        positionY={posArray['journal'][1]}
         >
         <h1>
             This is the dialog box for the Journal

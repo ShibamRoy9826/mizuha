@@ -42,6 +42,7 @@ export default function VolumeControl({isVisible,bottom,left}:Props){
                     <div
                     {...props}
                     key={props.key}
+                    className="focus:outline-0 focus:border-none"
                     style={{
                         ...props.style,
                         height: "15px",
