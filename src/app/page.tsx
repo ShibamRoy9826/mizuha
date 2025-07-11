@@ -32,7 +32,7 @@ export default function Home() {
     const toggleVolumeWindow=()=> setIsVolumeVisible(!isVolumeVisible);
 
     const changeBg=()=>{
-      let bg=localStorage.getItem("wallSource");
+      const bg=localStorage.getItem("wallSource");
       if(bg){
         setBgPath(bg);
       }
@@ -84,7 +84,7 @@ export default function Home() {
       getPos(pomoBtnRef.current,"pomo");
       getPos(eyeBtnRef.current,"eye");
 
-    },[bgBtnRef.current,settingsBtnRef.current,todoBtnRef.current,journalBtnRef.current,pomoBtnRef.current,eyeBtnRef.current])
+    },[])
 
   return (
     <>

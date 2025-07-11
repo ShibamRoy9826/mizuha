@@ -25,7 +25,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
             // console.log("wallpaper changed to:",wallName);
             onChange();
         }else{
-            let w=localStorage.getItem("wallSource");
+            const w=localStorage.getItem("wallSource");
             if(w){
                 setWall(w);
                 onChange();

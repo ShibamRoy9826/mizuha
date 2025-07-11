@@ -9,7 +9,7 @@ const silkscreen=Silkscreen({
 })
 
 export default function Clock(){
-    const [seconds,setSeconds]=useState("00");
+    // const [seconds,setSeconds]=useState("00");
     const [minutes,setMinutes]=useState("00");
     const [hours,setHours]=useState("12");
     const [ampm,setAmPm]=useState("PM");
@@ -20,7 +20,7 @@ export default function Clock(){
         const timer=setInterval(() => setTime(new Date()), 1000);
         const hrs=time.getHours()
 
-        setSeconds(time.getSeconds().toString().padStart(2,'0'));
+        // setSeconds(time.getSeconds().toString().padStart(2,'0'));
         setMinutes(time.getMinutes().toString().padStart(2,'0'));
         setHours(hrs.toString().padStart(2,'0'));
 
@@ -34,7 +34,7 @@ export default function Clock(){
             setAmPm("PM")
         }
         return ()=>clearInterval(timer); 
-    }, []);
+    }, [time]);
 
     return(
         <div className={` ${silkscreen.className} absolute top-8 left-1/2 -translate-x-1/2 rounded-xl flex items-center justify-center  w-auto text-8xl p-4 text-center gap-[2px] select-none bg-[var(--tint)]`}>

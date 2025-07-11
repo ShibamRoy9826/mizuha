@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import {Exo_2} from "next/font/google";
 import "@/styles/globals.css";
 
-// Components
-import Bg from "@/components/background";
-
 // Fonts -----------------------------------------------------
 const exo2= Exo_2({
   variable: "--font-exo-2",
