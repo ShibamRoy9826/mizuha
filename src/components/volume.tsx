@@ -1,16 +1,24 @@
-import {useState} from "react";
+"use client";
+import {useState,useRef,useEffect} from "react";
 import { Direction, getTrackBackground, Range } from "react-range";
 
 interface Props{
-    bottom:string,
-    left:string,
-    isVisible:boolean
+    isVisible:boolean,
+    toggleVisible:()=>void
 }
 
-export default function VolumeControl({isVisible,bottom,left}:Props){
+export default function VolumeControl({toggleVisible,isVisible}:Props){
     const [values, setValues] = useState([50]);
+
+    const volRef=useRef<HTMLDivElement|null>(null);
+
+    useEffect(()=>{
+        if(isVisible && volRef.current){
+            volRef.current.focus();
+        }
+    },[isVisible])
     return(
-        <div className="rounded-xl bg-[var(--tint-strong)] p-4 absolute backdrop-blur-sm shadow-lg " style={{display:isVisible?"flex":"none",'bottom':bottom,'left':left}}>
+        <div ref={volRef} tabIndex={0} onBlur={toggleVisible} className="z-4 absolute rounded-xl bg-[var(--tint-strong)] p-4 backdrop-blur-sm shadow-lg " style={{display:isVisible?"flex":"none",'top':"-16vh",'left':"0px"}} id="volumeSlider">
             <Range
                 step={1}
                 min={0}
@@ -31,7 +39,6 @@ export default function VolumeControl({isVisible,bottom,left}:Props){
                             min:0,
                             max:100,
                             direction:Direction.Up,
-
                         })
                     }}
                     >
@@ -42,6 +49,7 @@ export default function VolumeControl({isVisible,bottom,left}:Props){
                     <div
                     {...props}
                     key={props.key}
+                    // ref={volRef}
                     className="focus:outline-0 focus:border-none"
                     style={{
                         ...props.style,
@@ -53,7 +61,6 @@ export default function VolumeControl({isVisible,bottom,left}:Props){
                     }}
                     />
                 )}
-                
                 />
         </div>
     );

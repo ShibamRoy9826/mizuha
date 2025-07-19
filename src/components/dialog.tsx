@@ -32,7 +32,7 @@ export default function Dialog({id,closeFunc,visibleWindow,title,children,positi
                 if(rect && positionX && positionY){
                     pos.x=positionX-rect.width;
                     pos.y=positionY-rect.height;
-                    console.log("This line is seeming to work!!!",rect.width,rect.height,positionX,positionY);
+                    // console.log(rect.width,rect.height,positionX,positionY);
                     // pos.x=positionX;
                     // pos.y=positionY;
                 }
