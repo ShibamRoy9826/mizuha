@@ -2,6 +2,9 @@
 import Dialog from "@/components/dialog";
 import WallButton from "./wallButton";
 import {useEffect, useState} from "react";
+import Settings from "./dialogs/settings";
+import RadioStations from "./dialogs/radioStations";
+import SFX from "./dialogs/sfx";
 
 interface Props{
     dialogName:string|null,
@@ -11,11 +14,13 @@ interface Props{
     toggleEye:()=>void,
     toggleTodo:()=>void,
     toggleJournal:()=>void,
+    toggleEffects:()=>void,
+    toggleStations:()=>void,
     onChange:()=>void,
-    posArray:{"settings":number[],"eye":number[],"todo":number[],"journal":number[],"pomo":number[],"bg":number[]}
+    posArray:{"settings":number[],"eye":number[],"todo":number[],"journal":number[],"pomo":number[],"bg":number[],"effects":number[],"stations":number[]}
 }
 
-export default function DialogContainer({posArray,onChange,dialogName,toggleBg,togglePomodoro,toggleSettings,toggleEye, toggleTodo,toggleJournal}:Props){
+export default function DialogContainer({posArray,onChange,dialogName,toggleBg,togglePomodoro,toggleSettings,toggleEye, toggleTodo,toggleJournal,toggleEffects,toggleStations}:Props){
 
     const [wallName,setWall]=useState("videos/cozy-room.mp4");
     
@@ -85,10 +90,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         positionX={posArray['settings'][0]+60}
         positionY={posArray['settings'][1]}
         >
-        <h1>
-            This is the dialog box for settings
-        </h1>
-
+            <Settings/>
         </Dialog>
 
         <Dialog
@@ -151,6 +153,34 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         <h1>
             This is the dialog box for the Journal
         </h1>
+        </Dialog>
+
+        <Dialog
+        id="stations"
+        visibleWindow={dialogName}
+        title="Radio Stations"
+        width="auto"
+        height="auto"
+        closeFunc={toggleStations}
+        positionX={posArray['stations'][0]}
+        positionY={posArray['stations'][1]}
+        useHW={true}
+        >
+            <RadioStations/>
+        </Dialog>
+
+        <Dialog
+        id="effects"
+        visibleWindow={dialogName}
+        title="Sound Effects"
+        width="auto"
+        height="auto"
+        closeFunc={toggleEffects}
+        positionX={posArray['effects'][0]}
+        positionY={posArray['effects'][1]}
+        useHW={true}
+        >
+            <SFX/>
         </Dialog>
 
     </>

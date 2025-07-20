@@ -1,4 +1,4 @@
-import Shortcut from "@/components/shortcut";
+import Shortcut from "@/components/modules/shortcut";
 
 export default function ShortcutsContainer(){
     return (
