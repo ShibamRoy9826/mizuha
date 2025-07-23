@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import Settings from "./dialogs/settings";
 import RadioStations from "./dialogs/radioStations";
 import SFX from "./dialogs/sfx";
+import EyeRule from "./dialogs/eyeRule";
+import Todo from "./dialogs/todo";
 
 interface Props{
     dialogName:string|null,
@@ -120,9 +122,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         positionX={posArray['eye'][0]+60}
         positionY={posArray['eye'][1]}
         >
-        <h1>
-            This is the dialog box for the 20-20-20 rule timer
-        </h1>
+            <EyeRule/>
         </Dialog>
 
         <Dialog
@@ -135,9 +135,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         positionX={posArray['todo'][0]+60}
         positionY={posArray['todo'][1]}
         >
-        <h1>
-            This is the dialog box for the Todo list 
-        </h1>
+            <Todo/>
         </Dialog>
 
         <Dialog

@@ -21,7 +21,7 @@ export default function Settings(){
             />
 
             <h1 className="text-lg bold p-2 mx-2 ">Custom URL:</h1>
-            <input name="customSearch mx-2 p-2 w-auto h-auto" type="text" placeholder="Custom URL here" className="outline-none border-b-2 border-b-[var(--tint-stongest)]"/>
+            <input name="customSearch mx-2 p-2 w-full h-auto" type="text" placeholder="Custom URL here" className="outline-none border-b-2 border-b-[var(--tint-stongest)]"/>
 
         </div>
 

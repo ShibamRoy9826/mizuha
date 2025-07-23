@@ -3,6 +3,7 @@
 :root {
   --bg: #cdd6f4;
   --fg: #11111b;
+  --fg-2:rgba(0,0,0,0.2);
   --primary: rgba(255,255,255,0.2);
   --tint: rgba(0,0,0,0.1);
   --tint-strong: rgba(0,0,0,0.4);
@@ -20,6 +21,7 @@
   :root {
   --bg: #11111b;
   --fg: #ededed;
+  --fg: #ededed;
   }
 }
 
@@ -28,3 +30,28 @@ body {
   color: var(--fg);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+input[type="checkbox"]{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.15em;
+  border: 0.15em solid var(--primary);
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+input[type="checkbox"]:checked{
+  background-color: var(--primary);
+  position: relative;
+}
+
+input[type="checkbox"]::before{
+  font-size: 1.5em;
+  color: var(--fg);
+  position: absolute;
+  right: 1px;
+  top: -5px;
+}
+
