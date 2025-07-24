@@ -46,7 +46,6 @@ export default function Journal(){
 
     return(
         <div className="flex flex-col justify-center">
-        {/* <div className="w-[25vw] rounded-xl p-2 outline-none duration-500 focus:bg-[var(--tint-strong)] border-1 border-[var(--primary)] resize" contentEditable/> */}
         <div className="flex flex-row rounded-lg p-2 w-full border-[var(--primary)] items-center justify-center">
             <button
             className='flex items-center justify-center duration-500 w-[2.4rem] h-[2.4rem] border-1 border-[var(--primary)] hover:bg-[var(--primary)]'
@@ -101,7 +100,7 @@ export default function Journal(){
             </button>
         </div>
 
-        <EditorContent className="editor-content overflow-auto w-auto h-auto rounded-xl p-2 m-2 outline-none focus:bg-[var(--tint-strong)] border-1 border-[var(--primary)] resize" editor={editor} />
+        <EditorContent className="editor-content overflow-auto w-auto min-h-[15vh] h-auto rounded-xl p-2 m-2 outline-none focus:bg-[var(--tint-strong)] border-1 border-[var(--primary)] resize" editor={editor} />
         </div>
     );
 }

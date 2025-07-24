@@ -80,7 +80,7 @@ export default function Dialog({id,closeFunc,visibleWindow,title,children,positi
     }
 
     return (
-        <div ref={dialogRef} className="rounded-xl backdrop-blur-sm border-1 border-[rgba(255,255,255,0.2)] flex absolute z-3 bg-[var(--tint-strong)] hover:bg-[var(--tint-strongest)] shadow-lg transition-colors duration-500 ease-in-out overflow-visible" style={{display: isVisible?"flex":"none",width:width,height:height,left:pos.x,top:pos.y}}>
+        <div ref={dialogRef} className="rounded-xl backdrop-blur-sm border-1 border-[rgba(255,255,255,0.2)] flex absolute z-3 bg-[var(--tint-strong)] hover:bg-[var(--tint-strongest)] shadow-lg transition-colors duration-500 ease-in-out overflow-visible max-h-[70vh] max-w-[80w]" style={{display: isVisible?"flex":"none",width:width,height:height,left:pos.x,top:pos.y}}>
             <div className="relative top-0 left-0 w-full h-full flex flex-col items-center justify-center">
 
                 {/* titlebar */}

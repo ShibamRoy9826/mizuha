@@ -99,7 +99,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         <Dialog
         id="pomodoro"
         visibleWindow={dialogName}
-        title="Pomdoro"
+        title="Pomodoro"
         width="auto"
         height="auto"
         closeFunc={togglePomodoro}
