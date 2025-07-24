@@ -4,6 +4,7 @@
   --bg: #cdd6f4;
   --fg: #11111b;
   --fg-2:rgba(0,0,0,0.2);
+  --fg-3:rgba(255,255,255,0.7);
   --primary: rgba(255,255,255,0.2);
   --tint: rgba(0,0,0,0.1);
   --tint-strong: rgba(0,0,0,0.4);
@@ -21,7 +22,6 @@
   :root {
   --bg: #11111b;
   --fg: #ededed;
-  --fg: #ededed;
   }
 }
 
@@ -29,6 +29,42 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+[contenteditable]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.editor-content h1 {
+  font-size: 2rem;
+}
+.editor-content h2 {
+  font-size: 1.5rem;
+}
+.editor-content h3 {
+  font-size: 1rem;
+}
+
+.editor-content blockquote {
+  padding-left: 1rem;
+  border-left: 4px solid #ccc;
+  color: var(--fg-3);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.editor-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+.editor-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.editor-content li {
+  margin-bottom: 0.25rem;
 }
 
 input[type="checkbox"]{

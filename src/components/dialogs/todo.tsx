@@ -5,8 +5,8 @@ export default function Todo(){
     const [currentTab,setCurrentTab]=useState("Todo");
 
     return(
-        <>
-        <div className="bg-[var(--tint-strong)] rounded-xl p-2 flex flex-row items-center w-[20vw]">
+        <div className="flex flex-col items-center justify-center">
+        <div className="bg-[var(--tint-strong)] rounded-xl p-2 flex flex-row items-center w-auto">
             <input name="addTask" type="text" placeholder="What are you planning to do?" className="outline-none border-b-2 border-b-[var(--tint-stongest)] mx-2 field-sizing-content p-2 w-[20vw] h-auto" required/>
             
             <button className="flex flex-row items-center justify-center shadow-lg mx-2 p-2 rounded-xl hover:bg-[var(--primary)] duration-500 cursor-pointer ml-auto" style={{"border":"1px solid var(--primary)"}}>
@@ -17,9 +17,9 @@ export default function Todo(){
         </div>
 
         {/* task list */}
-        <div className="m-2 bg-[var(--tint)] rounded-xl p-2 flex flex-col">
+        <div className="m-2 bg-[var(--tint)] rounded-xl p-2 flex flex-col w-full">
 
-            <div className="flex flex-row p-2 items-center">
+            <div className="flex flex-row p-2 items-center w-full">
                 <input type="checkbox" className="mx-2"/>
                 <h1 className="overflow-hidden text-center w-full select-none">Some important task</h1>
                 <button className="flex flex-row items-center justify-center shadow-lg mx-2 p-2 rounded-xl hover:bg-[var(--primary)] duration-500 cursor-pointer ml-auto" style={{"border":"1px solid var(--primary)"}}>
@@ -48,7 +48,7 @@ export default function Todo(){
 
         </div>
 
-        <div className="bg-[var(--tint)] rounded-xl p-2 flex flex-row items-center justify-evenly w-[20vw]">
+        <div className="bg-[var(--tint)] rounded-xl p-2 flex flex-row items-center justify-evenly w-auto">
             <RadioBtnGroup
             setSelected={setCurrentTab}
             selected={currentTab}
@@ -57,6 +57,6 @@ export default function Todo(){
             />
 
         </div>
-        </>
+        </div>
     );
 }

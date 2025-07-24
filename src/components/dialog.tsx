@@ -92,7 +92,7 @@ export default function Dialog({id,closeFunc,visibleWindow,title,children,positi
                 </div>
 
                 {/* main content */}
-                <div className="w-full p-4 h-[90%]">
+                <div className="w-full p-4 h-[90%] resize overflow-auto m-2">
                     {children}
                 </div>
             </div>

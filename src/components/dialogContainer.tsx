@@ -7,6 +7,7 @@ import RadioStations from "./dialogs/radioStations";
 import SFX from "./dialogs/sfx";
 import EyeRule from "./dialogs/eyeRule";
 import Todo from "./dialogs/todo";
+import Journal from "./dialogs/journal";
 
 interface Props{
     dialogName:string|null,
@@ -148,9 +149,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         positionX={posArray['journal'][0]+60}
         positionY={posArray['journal'][1]}
         >
-        <h1>
-            This is the dialog box for the Journal
-        </h1>
+            <Journal/>
         </Dialog>
 
         <Dialog
