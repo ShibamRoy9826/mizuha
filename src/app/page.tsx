@@ -66,7 +66,7 @@ export default function Home() {
     function getPos(ele:HTMLDivElement|null,name:string){
       if(ele){
         const rect=ele.getBoundingClientRect();
-        console.log("Got bounding client rect for ",name, " its ", rect.left,rect.top);
+        // console.log("Got bounding client rect for ",name, " its ", rect.left,rect.top);
         setDialogPos(
               prev => ({
           ...prev,

@@ -19,7 +19,7 @@ export default function Settings(){
                 selected={selected}
                 setSelected={setSelected}
                 />
-                <div className="rounded-xl p-2 bg-[var(--tint-strong)] flex flex-row items-center justify-center mt-3 w-full">
+                <div className="rounded-xl p-2 bg-[var(--tint-strong)] flex flex-row items-center justify-center mt-3 w-auto">
                     <h1 className="text-md bold p-2 mx-2 ">Custom URL:</h1>
                     <input name="customSearch" type="text" className="mx-2 p-2 w-auto h-auto outline-none border-b-1 border-b-[var(--tint-stong)]"/>
                 </div>
