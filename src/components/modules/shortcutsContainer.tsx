@@ -11,10 +11,10 @@ interface ShortcutData{
 
 export default function ShortcutsContainer(){
 const [shortcuts,setShortcuts]=useState<ShortcutData[]>([
-                {id:0,name:"Youtube",iconPath:"/images/img.jpg",url:"https://youtube.com/"},
-                {id:1,name:"Google",iconPath:"/images/img.jpg",url:"https://google.com/"},
-                {id:2,name:"Amazon",iconPath:"/images/img.jpg",url:"https://amazon.in/"},
-                {id:3,name:"Whatsapp",iconPath:"/images/img.jpg",url:"https://web.whatsapp.com/"}
+                {id:0,name:"Youtube",iconPath:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png",url:"https://youtube.com/"},
+                {id:1,name:"Google",iconPath:"/images/img.jpg",url:"google.com"},
+                {id:2,name:"Amazon",iconPath:"/images/img.jpg",url:"amazon.in"},
+                {id:3,name:"Whatsapp",iconPath:"/images/img.jpg",url:"web.whatsapp.com"}
             ]);
 
 
@@ -76,14 +76,15 @@ const [shortcuts,setShortcuts]=useState<ShortcutData[]>([
     },[])
 
     return (
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 grid grid-cols-4 grid-row-2 w-[30vw] h-[5vw]">
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 grid grid-cols-4 grid-row-2 gap-2 w-auto h-[5vw]">
             {
                 shortcuts.map((e)=>(
                     <Shortcut
                     key={e.id}
                     id={e.id}
                     name={e.name}
-                    iconPath={e.iconPath}
+                    // iconPath={e.iconPath}
+                    iconPath={`https://www.google.com/s2/favicons?sz=64&domain=${e.url}`}
                     url={e.url}
                     />
                 ))

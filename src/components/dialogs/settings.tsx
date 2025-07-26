@@ -25,7 +25,7 @@ export default function Settings(){
                 </div>
             </section>
 
-            <section className="flex flex-col items-center w-full h-full">
+            <section className="mb-6 flex flex-col items-center w-full h-full">
                 <h1 className="underline bold text-2xl w-full text-center mb-4">
                    Widgets 
                 </h1>
@@ -67,6 +67,19 @@ export default function Settings(){
                 </div>
             </section>
 
+
+            <section className="mb-6 flex flex-col items-center w-full h-full">
+                <h1 className="underline bold text-2xl w-full text-center mb-4">
+                    Others
+                </h1>
+                <div className="flex flex-col items-center">
+                    <div className="flex flex-row items-center justify-center w-full">
+                        <h1>Open links in new tab: </h1>
+                        <input type="checkbox" className="mx-2" defaultChecked/>
+                    </div>
+                </div>
+
+            </section>
 
         </div>
     );

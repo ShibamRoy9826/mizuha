@@ -51,7 +51,7 @@ export default function DialogContainer({posArray,onChange,dialogName,toggleBg,t
         id="bg"
         visibleWindow={dialogName}
         title="Backgrounds"
-        width="40vw"
+        width="auto"
         height="50vh"
         closeFunc={toggleBg}
         positionX={posArray['bg'][0]}
