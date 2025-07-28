@@ -2,9 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'www.google.com',
-      'logo.clearbit.com'
+    remotePatterns: [
+      {
+        'protocol':"https",
+        'hostname':'www.google.com',
+        'port':'',
+        'pathname':'**'
+      },
+
+      {
+        'protocol':"https",
+        'hostname':'logo.clearbit.com',
+        'port':'',
+        'pathname':'**'
+      }
     ]
   },
 };
