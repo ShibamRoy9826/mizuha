@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
-import {Exo_2} from "next/font/google";
-import "@/styles/globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import Background from "@/components/background";
+import { BgProvider } from "@/contexts/background";
+import BottomBar from "@/components/bottomBar";
+import { SettingsProvider } from "@/contexts/settingsData";
+import { ModalProvider } from "@/contexts/modals";
 
-// Fonts -----------------------------------------------------
-const exo2= Exo_2({
-  variable: "--font-exo-2",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
-// Metadata -------------------------------------------------------
 export const metadata: Metadata = {
-  title: "New Tab",
-  description: "New tab by Shibam Roy",
+  title: "Mizuha",
+  description: "A glass-themed new-tab app",
 };
 
-
-// Root layout -------------------------------------------------
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,10 +30,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${exo2.variable} ${exo2.className} antialiased w-[100vw] h-[100vh] overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+
+        <SettingsProvider>
+          <ModalProvider>
+            <BgProvider>
+              <Background></Background>
+              {children}
+            </BgProvider>
+
+          </ModalProvider>
+        </SettingsProvider>
       </body>
-    </html>
+    </html >
   );
 }

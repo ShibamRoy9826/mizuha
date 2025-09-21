@@ -1,9 +1,3 @@
-# Mizuha
-
-A modern glass themed new tab application, has all the utilities you need while maintaining the sleek look. My aim is to make it as customizable as possible!
-
-### Readme is incomplete as of now, I will update it after finishing the project
-
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

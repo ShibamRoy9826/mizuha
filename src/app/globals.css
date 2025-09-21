@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --bg: rgba(0, 0, 0, 0.1);
+  --bg-lighter: rgba(0, 0, 0, 0.05);
+  --bg-darker: rgba(0, 0, 0, 0.2);
+  --bg-darkest: rgba(0, 0, 0, 0.3);
+  --fg: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: rgba(0, 0, 0, 0.1);
+    --fg: #ffffff;
+  }
+}
+
+
+body {
+  background-color: var(--bg);
+  overflow: hidden;
+  color: var(--fg);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.glass {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+.glass::before {
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+.pad {
+  padding: 1rem;
+}
+
+
+.button {
+  background-color: var(--bg-lighter);
+  backdrop-filter: blur(15px);
+  border-radius: 10;
+  border: 1px solid var(--bg-lighter);
+  box-shadow: 5px 5px 20px 2px var(--bg);
+}
+
+
+.closeButton {
+  background-color: rgb(255, 63, 63);
+  padding: 0.1rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: rgb(182, 9, 9);
+  padding: 0.1rem;
+  border-radius: 1rem;
+}

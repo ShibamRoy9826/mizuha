@@ -1,34 +1,21 @@
 "use client";
-import {useEffect,useRef} from "react";
+import { useBg } from "@/contexts/background"
 
-interface Props{
-    bgPath:string
-}
-
-function Bg({bgPath}:Props){
-    const videoRef=useRef<HTMLVideoElement>(null);
-
-    useEffect(()=>{
-        if(videoRef.current){
-            videoRef.current.load();
-        }
-    },[bgPath]);
+export default function Background() {
+    const { currBg } = useBg()
 
     return (
-        <div className="w-full h-full  fixed z-[-1] overflow-hidden">
-            <video className="w-full h-full object-cover"
-            ref={videoRef}
+        <video
+            key={currBg}
             autoPlay
             muted
             loop
             playsInline
-            disablePictureInPicture
-            >
-            <source src={bgPath} type="video/mp4"/>
-            Your browser does not support the video tag.
-            </video> 
-        </div>
-    );
-}
+            className="absolute top-0 left-0 w-full h-full object-cover -z-1"
+        >
+            <source src={currBg} type="video/mp4" />
+        </video>
 
-export default Bg;
+
+    )
+}
