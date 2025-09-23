@@ -1,13 +1,14 @@
 'use client';
 import React, { useRef, createContext, useContext, useEffect, useState } from "react";
 import { X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useDragControls } from 'motion/react';
 
 type modalContextType = {
     setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
     setDirection: React.Dispatch<React.SetStateAction<"left" | "right" | "up" | "down">>;
     isVisible: boolean;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ModalContext = createContext<modalContextType | null>(null);
@@ -20,10 +21,17 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const modalRef = useRef<null | HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
     const [direction, setDirection] = useState<"left" | "right" | "up" | "down">("left");
+    const [title, setTitle] = useState("");
+    const dragControls = useDragControls();
 
     function updateWindowSize() {
         windowSize.current = { width: window.innerWidth, height: window.innerHeight };
     }
+    function onTitleBar(e: React.MouseEvent) {
+        e.preventDefault();
+        dragControls.start(e);
+    }
+
     useEffect(() => {
         updateWindowSize();
         window.addEventListener('resize', updateWindowSize);
@@ -73,14 +81,15 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                 setIsVisible,
                 setContent,
                 isVisible,
-                setDirection
+                setDirection,
+                setTitle
             }
         }>
             <AnimatePresence>
                 {
                     isVisible &&
                     <motion.div
-                        className='glass flex flex-col resize absolute z-10'
+                        className='glass flex flex-col absolute z-10 resize overflow-hidden'
                         initial={
                             getInitialState(direction)
                         }
@@ -91,15 +100,20 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                         transition={{ duration: 0.3 }}
                         ref={modalRef}
                         drag
+                        dragControls={dragControls}
+                        dragListener={false}
                         dragMomentum={false}
                     >
                         <div
-                            className='w-full h-8 bg-[var(--bg-darkest)] inline-flex p-1 cursor-move'>
+                            className='w-full h-8 bg-[var(--bg-darkest)] inline-flex p-1 cursor-move items-center'
+                            onPointerDown={onTitleBar}
+                        >
+                            <h1 className="text-[var(--fg2)] text-sm">{title}</h1>
                             <div className='ml-auto flex items-center justify-center closeButton' onClick={() => setIsVisible(!isVisible)}>
                                 <X size={20} />
                             </div>
                         </div>
-                        <div className='p-4 flex items-center justify-center'>
+                        <div className='p-4 flex items-center justify-center '>
                             {content}
                         </div>
                     </motion.div>

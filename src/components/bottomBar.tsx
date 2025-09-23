@@ -1,37 +1,41 @@
 "use client";
 import Button from "@/components/inputs/button"
 import { motion } from 'motion/react';
-import { AudioWaveform, ChevronDown, ChevronUp, Image, Pause, Play, Radio } from "lucide-react";
+import { AudioWaveform, ChevronDown, ChevronUp, Image, Pause, Play, Radio, Volume, Volume1, Volume2 } from "lucide-react";
 import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
 import BgModal from "./modals/bgModal";
 import StationModal from "./modals/stationModal";
 import SfxModal from "./modals/sfxModal";
+import CurrentSong from "./currentSong";
 
 export default function BottomBar() {
     const { settings } = useSettings();
     const [isBBVisible, setVisible] = useState(true);
     const [paused, setPaused] = useState(true);
 
-    const { setContent, setIsVisible, isVisible, setDirection } = useModal();
+    const { setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
+    const [volumeLvl, setVolumeLvl] = useState(2);
 
     function toggleBgModal() {
-        console.log("toggleBgModal ran");
+        setTitle("Backgrounds");
         setDirection("down");
-        setContent(BgModal);
+        setContent(<BgModal />);
         setIsVisible(!isVisible);
     }
 
     function toggleStation() {
+        setTitle("Stations");
         setDirection("down");
-        setContent(StationModal);
+        setContent(<StationModal />);
         setIsVisible(!isVisible);
     }
 
     function toggleSfx() {
+        setTitle("Sounds Effects");
         setDirection("down");
-        setContent(SfxModal);
+        setContent(<SfxModal />);
         setIsVisible(!isVisible);
     }
 
@@ -41,21 +45,44 @@ export default function BottomBar() {
                 initial={{ bottom: -150 }}
                 animate={{ bottom: isBBVisible ? 10 : -150 }}
                 transition={{ duration: settings.animTime, type: "spring" }}
-                className="flex flex-row p-6 absolute glass w-[80%] h-auto left-[50%] translate-x-[-50%]">
-                <Button
-                    icon={
-                        paused ?
-                            <Pause
-                                size={20}
-                            /> :
-                            <Play
-                                size={20}
-                            />
-                    }
-                    func={() => { setPaused(!paused) }}
-                />
+                className="flex flex-row p-6 absolute glass w-[80%] h-auto left-[50%] translate-x-[-50%] justify-center">
+                <div className="w-2rem flex flex-row items-center justify-center gap-8">
+                    <CurrentSong
+                        name="Test song"
+                        image="/backgrounds/thumbnails/cozy-room.png"
+                        artist="Cool person"
+                        album="Cool album"
+                    />
+                    <div className="flex flex-row items-center justify-center gap-4">
+                        <Button
+                            icon={
+                                paused ?
+                                    <Pause
+                                        size={20}
+                                    /> :
+                                    <Play
+                                        size={20}
+                                    />
+                            }
+                            func={() => { setPaused(!paused) }}
+                        />
 
-                <div className="gap-4 ml-auto">
+                        <Button
+                            icon={
+                                (volumeLvl === 0) ?
+                                    <Volume
+                                        size={20}
+                                    /> :
+                                    (volumeLvl === 1) ?
+                                        <Volume1 size={20} /> :
+                                        <Volume2 size={20} />
+                            }
+                            func={() => { }}
+                        />
+                    </div>
+                </div>
+
+                <div className="gap-2 ml-auto flex items-center">
 
                     <Button
                         icon={

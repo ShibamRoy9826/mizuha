@@ -3,18 +3,27 @@ import Button from "@/components/inputs/button"
 import { motion } from 'motion/react';
 import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
-import { AudioWaveform, Radio, ChevronRight, ChevronLeft, Settings } from "lucide-react";
+import { ChevronRight, ChevronLeft, Settings, ClipboardList, Clock } from "lucide-react";
 import { useModal } from "@/contexts/modals";
 import SettingsModal from "./modals/settingsModal";
+import JournalModal from "./modals/journalModal";
 
 export default function SideBar() {
     const { settings } = useSettings();
     const [isSidebarVisible, setVisible] = useState(true);
-    const { setContent, setIsVisible, isVisible, setDirection } = useModal();
+    const { setContent, setIsVisible, isVisible, setDirection, setTitle } = useModal();
 
     function toggleSettingsModal() {
+        setTitle("Settings")
         setDirection("left");
-        setContent(SettingsModal);
+        setContent(<SettingsModal />);
+        setIsVisible(!isVisible);
+    }
+
+    function toggleJournalModal() {
+        setTitle("Journal")
+        setDirection("left");
+        setContent(<JournalModal />);
         setIsVisible(!isVisible);
     }
 
@@ -37,14 +46,14 @@ export default function SideBar() {
 
                 <Button
                     icon={
-                        <AudioWaveform size={20} />
+                        <ClipboardList size={20} />
                     }
-                    func={() => { }}
+                    func={() => { toggleJournalModal() }}
                     moreClasses="my-1"
                 />
                 <Button
                     icon={
-                        <Radio size={20} />
+                        <Clock size={20} />
                     }
                     func={() => { }}
                     moreClasses="my-1"

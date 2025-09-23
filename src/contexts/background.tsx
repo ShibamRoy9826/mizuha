@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 
 type bgContextType = {
-    setCurrBg: React.Dispatch<React.SetStateAction<string | undefined>>;
+    setCurrBg: (bg: string | undefined) => void;
     currBg: string | undefined;
     bgList: string[];
 }
@@ -11,8 +11,14 @@ const BgContext = createContext<bgContextType | undefined>(undefined);
 
 export function BgProvider({ children }: { children: React.ReactNode }) {
     const [bgList, setBgList] = useState<string[]>([]);
-    const [currBg, setCurrBg] = useState<string | undefined>(undefined);
+    const [currBg, setCBg] = useState<string | undefined>(undefined);
 
+    function setCurrBg(bg: string | undefined) {
+        setCBg(bg);
+        if (bg) {
+            localStorage.setItem("background", bg);
+        }
+    }
     async function loadBackgrounds() {
         const res = await fetch("/api/backgrounds");
         const list: string[] = await res.json();
@@ -22,7 +28,7 @@ export function BgProvider({ children }: { children: React.ReactNode }) {
         const background = localStorage.getItem("background");
 
         if (background) {
-            setCurrBg(background);
+            setCBg(background);
         } else {
             setCurrBg(list[0]);
         }
