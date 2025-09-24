@@ -47,11 +47,11 @@ export default function BottomBar() {
                 transition={{ duration: settings.animTime, type: "spring" }}
                 className="flex flex-row p-6 absolute glass w-[80%] h-auto left-[50%] translate-x-[-50%] justify-center">
                 <div className="w-2rem flex flex-row items-center justify-center gap-8">
-                    {/* <CurrentSong
-                        name={currSong.title}
-                        image={currSong.image}
-                        artists={currSong.artists}
-                    /> */}
+                    <CurrentSong
+                        name={currSong?.title ?? ""}
+                        image={currSong?.image ?? "/defaultSong.jpeg"}
+                        artists={currSong?.artists ?? ""}
+                    />
                     <div className="flex flex-row items-center justify-center gap-4">
                         <Button
                             icon={

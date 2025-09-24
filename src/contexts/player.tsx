@@ -3,6 +3,7 @@ import React, { createContext, useContext, useRef, useState, useEffect } from "r
 import { songItem } from "@/utils/type";
 import { station } from "@/utils/type";
 import { getStations } from "@/utils/chillhopUtils";
+import { getStationSongs } from "@/utils/chillhopUtils";
 
 
 type playerContextType = {
@@ -24,6 +25,8 @@ const PlayerContext = createContext<playerContextType | undefined>(undefined);
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [queue, setQueue] = useState<songItem[]>([]);
+    const qIndex = useRef(0);
+
     const [playing, setPlaying] = useState(false);
     const [volume, setVolume] = useState(0);
     const [currSongId, setCurrSongId] = useState(10000);
@@ -44,9 +47,45 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         audioRef.current.play().catch(e => console.log("Playback failed, ", e));
     }
 
+    function handleSongEnd() {
+        if (queue.length !== 0) {
+            qIndex.current += 1
+            playNewSong(queue[qIndex.current].endpoint);
+            setCurrSong(queue[qIndex.current]);
+        }
+    }
+
     useEffect(() => {
-        getStations().then((d) => setStations(d.stations));
+        if (!audioRef.current) return;
+
+        if (playing) {
+            audioRef.current.pause()
+        } else {
+            audioRef.current.play().catch(e => console.log(e));
+        }
+    }, [playing])
+
+    useEffect(() => {
+        getStations().then((d) => { setStations(d.stations); setCurrStation(d.stations[0]) });
     }, []);
+
+    useEffect(() => {
+        console.log("Queue length", queue.length);
+        if (queue.length !== 0) {
+            playNewSong(queue[qIndex.current].endpoint);
+            setCurrSong(queue[qIndex.current]);
+        }
+    }, [queue])
+
+    useEffect(() => {
+        async function getSongs() {
+            if (currStation) {
+                const data = await getStationSongs(currStation.id);
+                setQueue(data);
+            }
+        }
+        getSongs();
+    }, [currStation])
 
     return (
         <PlayerContext.Provider value={
@@ -58,6 +97,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
             <audio
                 ref={audioRef}
                 className="hidden"
+                onEnded={handleSongEnd}
             />
             {children}
         </PlayerContext.Provider>

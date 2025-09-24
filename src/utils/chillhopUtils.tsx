@@ -1,7 +1,6 @@
 import { CHData } from "./type";
 
 export async function getStationSongs(stationId: number) {
-    // songs for a particular station
     const response = await fetch(`/api/stream/${stationId}`)
     const data = await response.json();
     return data;
