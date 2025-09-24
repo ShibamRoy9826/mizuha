@@ -6,6 +6,7 @@ import { BgProvider } from "@/contexts/background";
 import BottomBar from "@/components/bottomBar";
 import { SettingsProvider } from "@/contexts/settingsData";
 import { ModalProvider } from "@/contexts/modals";
+import { PlayerProvider } from "@/contexts/player";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,11 +36,13 @@ export default function RootLayout({
 
         <BgProvider>
           <SettingsProvider>
-            <ModalProvider>
-              <Background></Background>
-              {children}
+            <PlayerProvider>
+              <ModalProvider>
+                <Background></Background>
+                {children}
 
-            </ModalProvider>
+              </ModalProvider>
+            </PlayerProvider>
           </SettingsProvider>
         </BgProvider>
       </body>

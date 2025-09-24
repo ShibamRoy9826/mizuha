@@ -23,7 +23,6 @@ export function BgProvider({ children }: { children: React.ReactNode }) {
         const res = await fetch("/api/backgrounds");
         const list: string[] = await res.json();
         setBgList(list);
-        console.log(list);
 
         const background = localStorage.getItem("background");
 

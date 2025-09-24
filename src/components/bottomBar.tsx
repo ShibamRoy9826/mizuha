@@ -9,14 +9,14 @@ import BgModal from "./modals/bgModal";
 import StationModal from "./modals/stationModal";
 import SfxModal from "./modals/sfxModal";
 import CurrentSong from "./currentSong";
+import { usePlayer } from "@/contexts/player";
 
 export default function BottomBar() {
     const { settings } = useSettings();
     const [isBBVisible, setVisible] = useState(true);
-    const [paused, setPaused] = useState(true);
 
     const { setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
-    const [volumeLvl, setVolumeLvl] = useState(2);
+    const { playing, volume, currSong, togglePlayback, setVolume, setCurrSong } = usePlayer();
 
     function toggleBgModal() {
         setTitle("Backgrounds");
@@ -47,33 +47,32 @@ export default function BottomBar() {
                 transition={{ duration: settings.animTime, type: "spring" }}
                 className="flex flex-row p-6 absolute glass w-[80%] h-auto left-[50%] translate-x-[-50%] justify-center">
                 <div className="w-2rem flex flex-row items-center justify-center gap-8">
-                    <CurrentSong
-                        name="Test song"
-                        image="/backgrounds/thumbnails/cozy-room.png"
-                        artist="Cool person"
-                        album="Cool album"
-                    />
+                    {/* <CurrentSong
+                        name={currSong.title}
+                        image={currSong.image}
+                        artists={currSong.artists}
+                    /> */}
                     <div className="flex flex-row items-center justify-center gap-4">
                         <Button
                             icon={
-                                paused ?
-                                    <Pause
+                                playing ?
+                                    <Play
                                         size={20}
                                     /> :
-                                    <Play
+                                    <Pause
                                         size={20}
                                     />
                             }
-                            func={() => { setPaused(!paused) }}
+                            func={() => { togglePlayback(!playing) }}
                         />
 
                         <Button
                             icon={
-                                (volumeLvl === 0) ?
+                                (volume <= 0.3) ?
                                     <Volume
                                         size={20}
                                     /> :
-                                    (volumeLvl === 1) ?
+                                    (volume <= 0.7) ?
                                         <Volume1 size={20} /> :
                                         <Volume2 size={20} />
                             }

@@ -27,7 +27,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     function updateWindowSize() {
         windowSize.current = { width: window.innerWidth, height: window.innerHeight };
     }
-    function onTitleBar(e: React.MouseEvent) {
+    function onTitleBar(e: React.PointerEvent) {
         e.preventDefault();
         dragControls.start(e);
     }
@@ -49,10 +49,6 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
             height: modalRef.current ? modalRef.current.offsetHeight : 0
         };
         if (isVisible) {
-            console.log({
-                x: (windowSize.current.width - elementSize.current.width) / 2,
-                y: (windowSize.current.height - elementSize.current.height / 2)
-            })
             setPos({
                 x: (windowSize.current.width - elementSize.current.width) / 2,
                 y: (windowSize.current.height - elementSize.current.height) / 2
@@ -89,7 +85,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                 {
                     isVisible &&
                     <motion.div
-                        className='glass flex flex-col absolute z-10 resize overflow-hidden'
+                        className='glass flex flex-col absolute z-10 resize overflow-hidden max-h-[70vh]'
                         initial={
                             getInitialState(direction)
                         }
@@ -113,7 +109,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                                 <X size={20} />
                             </div>
                         </div>
-                        <div className='p-4 flex items-center justify-center '>
+                        <div className='overflow-scroll w-full h-full '>
                             {content}
                         </div>
                     </motion.div>

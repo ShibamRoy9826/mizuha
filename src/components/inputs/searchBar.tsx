@@ -29,6 +29,7 @@ export default function SearchBar() {
                 initial={{ width: 0 }}
                 animate={{ width: "60vw" }}
                 transition={{ duration: settings.animTime }}
+                whileFocus={{ width: "70vw" }}
             >
                 <input
                     onChange={onQueryChange}
