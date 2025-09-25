@@ -4,6 +4,7 @@ import { songItem } from "@/utils/type";
 import { station } from "@/utils/type";
 import { getStations } from "@/utils/chillhopUtils";
 import { getStationSongs } from "@/utils/chillhopUtils";
+import CurrentSong from "@/components/currentSong";
 
 
 type playerContextType = {
@@ -28,7 +29,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const qIndex = useRef(0);
 
     const [playing, setPlaying] = useState(false);
-    const [volume, setVolume] = useState(0);
+    const [volume, setVolume] = useState(1);
     const [currSongId, setCurrSongId] = useState(10000);
     const [stations, setStations] = useState<station[]>([]);
 
@@ -38,19 +39,13 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
     function togglePlayback(a: boolean) {
         if (!audioRef.current) return;
+        console.log("Toggle playing called, ", a);
         setPlaying(a);
-    }
-
-    function playNewSong(url: string) {
-        if (!audioRef.current) return;
-        audioRef.current.src = url;
-        audioRef.current.play().catch(e => console.log("Playback failed, ", e));
     }
 
     function handleSongEnd() {
         if (queue.length !== 0) {
             qIndex.current += 1
-            playNewSong(queue[qIndex.current].endpoint);
             setCurrSong(queue[qIndex.current]);
         }
     }
@@ -58,12 +53,17 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!audioRef.current) return;
 
-        if (playing) {
-            audioRef.current.pause()
+        if (!playing) {
+            audioRef.current.pause();
         } else {
             audioRef.current.play().catch(e => console.log(e));
         }
     }, [playing])
+
+    useEffect(() => {
+        if (!audioRef.current) return;
+        audioRef.current.volume = volume;
+    }, [volume])
 
     useEffect(() => {
         getStations().then((d) => { setStations(d.stations); setCurrStation(d.stations[0]) });
@@ -71,8 +71,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         console.log("Queue length", queue.length);
+        console.log("Queue: ", queue);
         if (queue.length !== 0) {
-            playNewSong(queue[qIndex.current].endpoint);
             setCurrSong(queue[qIndex.current]);
         }
     }, [queue])
@@ -96,6 +96,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         }>
             <audio
                 ref={audioRef}
+                src={currSong?.endpoint}
                 className="hidden"
                 onEnded={handleSongEnd}
             />

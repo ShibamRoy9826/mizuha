@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { stations } from "../../stations/routeUtils";
 
 export async function GET(
@@ -23,7 +23,7 @@ export async function GET(
 
     return NextResponse.json(songs, {
         headers: {
-            "ContentType": "application/json"
+            "Content-Type": "application/json"
         }
     })
 

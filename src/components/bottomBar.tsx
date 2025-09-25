@@ -10,6 +10,7 @@ import StationModal from "./modals/stationModal";
 import SfxModal from "./modals/sfxModal";
 import CurrentSong from "./currentSong";
 import { usePlayer } from "@/contexts/player";
+import VolumeSlider from "./dropdowns/volumeSlider";
 
 export default function BottomBar() {
     const { settings } = useSettings();
@@ -56,28 +57,18 @@ export default function BottomBar() {
                         <Button
                             icon={
                                 playing ?
-                                    <Play
+                                    <Pause
                                         size={20}
                                     /> :
-                                    <Pause
+                                    <Play
                                         size={20}
                                     />
                             }
                             func={() => { togglePlayback(!playing) }}
                         />
 
-                        <Button
-                            icon={
-                                (volume <= 0.3) ?
-                                    <Volume
-                                        size={20}
-                                    /> :
-                                    (volume <= 0.7) ?
-                                        <Volume1 size={20} /> :
-                                        <Volume2 size={20} />
-                            }
-                            func={() => { }}
-                        />
+                        <VolumeSlider />
+
                     </div>
                 </div>
 

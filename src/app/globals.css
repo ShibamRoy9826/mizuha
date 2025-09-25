@@ -7,7 +7,7 @@
   --bg-darkest: rgba(0, 0, 0, 0.3);
   --fg: #ffffff;
   --fg2: #ababab;
-  --accent: red;
+  --accent: #8caaee;
 }
 
 @theme inline {
@@ -25,7 +25,7 @@
     --bg-darkest: rgba(0, 0, 0, 0.3);
     --fg: #ffffff;
     --fg2: #ababab;
-    --accent: red;
+    --accent: #8caaee;
   }
 }
 
@@ -99,4 +99,8 @@ body {
 .selectedItem {
   background-color: var(--bg-darkest) !important;
 
+}
+
+.slider {
+  accent-color: var(--accent);
 }
