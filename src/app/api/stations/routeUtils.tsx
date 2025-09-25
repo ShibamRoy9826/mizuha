@@ -1,4 +1,3 @@
-import { getCHData } from "@/utils/chillhopUtils";
 import { songItem } from "@/utils/type"
 
 async function getCHStation(stationId: number) {
@@ -21,7 +20,7 @@ async function getCHStation(stationId: number) {
         return songData;
 
     } catch (e) {
-        console.log("Error occured, couldn't make request to chillhop, 404 likely")
+        console.log("Error occured, couldn't make request to chillhop, 404 likely", e)
     }
 }
 

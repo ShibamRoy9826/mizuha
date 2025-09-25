@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/background";
 import { BgProvider } from "@/contexts/background";
-import BottomBar from "@/components/bottomBar";
 import { SettingsProvider } from "@/contexts/settingsData";
 import { ModalProvider } from "@/contexts/modals";
 import { PlayerProvider } from "@/contexts/player";

@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/inputs/button"
 import { motion } from 'motion/react';
-import { AudioWaveform, ChevronDown, ChevronUp, Image, Pause, Play, Radio, Volume, Volume1, Volume2 } from "lucide-react";
+import { AudioWaveform, ChevronDown, ChevronUp, Image, Pause, Play, Radio } from "lucide-react";
 import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
@@ -17,7 +17,7 @@ export default function BottomBar() {
     const [isBBVisible, setVisible] = useState(true);
 
     const { setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
-    const { playing, volume, currSong, togglePlayback, setVolume, setCurrSong } = usePlayer();
+    const { playing, currSong, togglePlayback } = usePlayer();
 
     function toggleBgModal() {
         setTitle("Backgrounds");

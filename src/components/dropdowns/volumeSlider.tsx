@@ -43,7 +43,7 @@ export default function VolumeSlider() {
                                 max={1}
                                 step={0.01}
                                 value={volume}
-                                onChange={(e: any) => {
+                                onChange={(e) => {
                                     setVolume(parseFloat(e.target.value));
                                 }}
                                 className="slider"

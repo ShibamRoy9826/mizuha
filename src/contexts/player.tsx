@@ -4,7 +4,6 @@ import { songItem } from "@/utils/type";
 import { station } from "@/utils/type";
 import { getStations } from "@/utils/chillhopUtils";
 import { getStationSongs } from "@/utils/chillhopUtils";
-import CurrentSong from "@/components/currentSong";
 
 
 type playerContextType = {
