@@ -1,12 +1,13 @@
 'use client';
 import React, { useRef, createContext, useContext, useEffect, useState } from "react";
-import { X } from 'lucide-react';
+import { Settings, X } from 'lucide-react';
 import { AnimatePresence, motion, useDragControls } from 'motion/react';
+import { useSettings } from "./settingsData";
 
 type modalContextType = {
     setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    setDirection: React.Dispatch<React.SetStateAction<"left" | "right" | "up" | "down">>;
+    setDirection: React.Dispatch<React.SetStateAction<string>>;
     isVisible: boolean;
     setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -20,6 +21,8 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const [pos, setPos] = useState({ x: 0, y: 0 })
     const modalRef = useRef<null | HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const { settings } = useSettings();
+
     const [direction, setDirection] = useState<"left" | "right" | "up" | "down">("left");
     const [title, setTitle] = useState("");
     const dragControls = useDragControls();
@@ -93,7 +96,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                         exit={
                             getInitialState(direction)
                         }
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: settings.windowSpeed }}
                         ref={modalRef}
                         drag
                         dragControls={dragControls}

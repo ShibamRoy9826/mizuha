@@ -15,14 +15,14 @@ export default function SideBar() {
 
     function toggleSettingsModal() {
         setTitle("Settings")
-        setDirection("left");
+        setDirection(settings.sidebarPos);
         setContent(<SettingsModal />);
         setIsVisible(!isVisible);
     }
 
     function toggleJournalModal() {
         setTitle("Journal")
-        setDirection("left");
+        setDirection(settings.sidebarPos);
         setContent(<JournalModal />);
         setIsVisible(!isVisible);
     }
@@ -31,10 +31,10 @@ export default function SideBar() {
     return (
         <>
             <motion.div
-                initial={(settings.sidebarPos === "left") ? { left: -100 } : { right: -100 }}
-                animate={(settings.sidebarPos === "left") ? { left: isSidebarVisible ? 10 : -100 } : { right: isSidebarVisible ? 10 : -100 }}
+                initial={(settings.sidebarPos === "left") ? { left: "-10vw" } : { left: "110vw" }}
+                animate={(settings.sidebarPos === "left") ? { left: isSidebarVisible ? 10 : "-10vw" } : { left: isSidebarVisible ? "95vw" : "110vw" }}
                 transition={{ duration: settings.animTime, type: "spring" }}
-                className="p-4 flex flex-col absolute glass h-auto w-auto top-[50%] translate-y-[-50%]">
+                className="p-4 flex flex-col absolute glass h-auto w-fit top-[50%] translate-y-[-50%]">
                 <Button
                     icon={
                         <Settings size={20} />
@@ -77,8 +77,8 @@ export default function SideBar() {
             </motion.div>
 
             <motion.div
-                initial={(settings.sidebarPos === "left") ? { left: -100 } : { right: -100 }}
-                animate={(settings.sidebarPos === "left") ? { left: isSidebarVisible ? -100 : 0 } : { right: isSidebarVisible ? 10 : -100 }}
+                initial={(settings.sidebarPos === "left") ? { left: "-10vw" } : { left: "110vw" }}
+                animate={(settings.sidebarPos === "left") ? { left: isSidebarVisible ? "-10vw" : 0 } : { left: isSidebarVisible ? "110vw" : "95vw" }}
                 transition={{ duration: settings.animTime, type: "spring" }}
                 className="pad absolute top-[50%] translate-y-[-50%]"
             >

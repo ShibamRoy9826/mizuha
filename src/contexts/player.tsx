@@ -65,11 +65,20 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     }, [volume])
 
     useEffect(() => {
-        getStations().then((d) => { setStations(d.stations); setCurrStation(d.stations[0]) });
+        getStations().then((d) => {
+            setStations(d.stations);
+            const savedStation = localStorage.getItem("station")
+            if (savedStation) {
+                setCurrStation(JSON.parse(savedStation));
+                console.log(savedStation);
+            } else {
+                setCurrStation(d.stations[0]);
+            }
+        });
+
     }, []);
 
     useEffect(() => {
-        console.log("Queue length", queue.length);
         console.log("Queue: ", queue);
         if (queue.length !== 0) {
             setCurrSong(queue[qIndex.current]);
@@ -81,9 +90,11 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
             if (currStation) {
                 const data = await getStationSongs(currStation.id);
                 setQueue(data);
+                localStorage.setItem("station", JSON.stringify(currStation));
             }
         }
         getSongs();
+        togglePlayback(false);
     }, [currStation])
 
     return (

@@ -1,8 +1,10 @@
 export type settingsType = {
     animTime: number;
+    windowSpeed: number;
     background: string;
     foreground: string;
     backgroundLighter: string;
+    backgroundDarker: string;
     sidebarPos: string;
 }
 
