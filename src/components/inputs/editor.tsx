@@ -18,22 +18,31 @@ import { Italic } from "@tiptap/extension-italic";
 import { Underline } from "@tiptap/extension-underline";
 import { Strike } from "@tiptap/extension-strike";
 import { BoldIcon, Heading1, ItalicIcon, List, Quote, StrikethroughIcon, UnderlineIcon } from "lucide-react";
+import { useNotesContext } from "@/contexts/notes";
 
 interface Props {
+    currIndex: number | null;
     content: string;
     onChange: React.Dispatch<React.SetStateAction<string>>;
     title: string;
 }
 
-export default function EditorBox({ title, content, onChange }: Props) {
+export default function EditorBox({ currIndex, title, content, onChange }: Props) {
+    const { updateItem, list } = useNotesContext();
+
     const editor = useEditor({
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
         },
         onBlur: ({ editor }) => {
             const html = editor.getHTML();
-            localStorage.setItem("noteTemp", JSON.stringify({ title: title, text: html }));
-            console.log("Set backup data: ", { title: title, text: html });
+            if (currIndex !== null) {
+                updateItem(currIndex, title, content);
+                console.log();
+            } else {
+                // for new note
+                localStorage.setItem("noteTemp", JSON.stringify({ title: title, text: html }));
+            }
         },
         editorProps: {
             attributes: {
@@ -91,10 +100,17 @@ export default function EditorBox({ title, content, onChange }: Props) {
     }, [editor]);
 
     useEffect(() => {
-        const data = localStorage.getItem("noteTemp");
-        if (data && editor) {
-            editor.commands.setContent(JSON.parse(data).text);
-            console.log("Tried to set content to: ", JSON.parse(data).text);
+        if (currIndex !== null) {
+            const data = list[currIndex];
+
+            if (data && editor) {
+                editor.commands.setContent(data.text);
+            }
+        } else {
+            const data = localStorage.getItem("noteTemp");
+            if (data && editor) {
+                editor.commands.setContent(JSON.parse(data).text);
+            }
         }
     }, [editor])
 

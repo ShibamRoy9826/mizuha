@@ -1,14 +1,19 @@
 import { useSettings } from "@/contexts/settingsData";
-import { EllipsisVertical, Square } from "lucide-react";
+import { Delete, EllipsisVertical, Square, Trash } from "lucide-react";
 import { motion } from 'motion/react';
 import { note } from "@/utils/type";
+import { useHydratedNotes, useNotesContext } from "@/contexts/notes";
 
 interface Props {
     text: note;
+    onClick: () => void;
+    index: number
 }
 
-export default function NoteMinimized({ text }: Props) {
+export default function NoteMinimized({ index, text, onClick }: Props) {
+    useHydratedNotes();
     const { settings } = useSettings();
+    const { removeItem } = useNotesContext();
     return (
         <motion.div
             initial={{ scale: 0, opacity: 0, }}
@@ -20,11 +25,14 @@ export default function NoteMinimized({ text }: Props) {
                 scale: 0,
                 opacity: 0
             }}
+            onClick={onClick}
+            whileHover={{ backgroundColor: settings.backgroundLighter }}
             transition={{ duration: settings.animTime, type: "spring" }}
-            className="min-h-10 rounded-xl my-[5px] border-[var(--lighter)] bg-[var(--bg-darker)] w-full flex flex-row items-center justify-center p-2">
+            className=" cursor-pointer min-h-10 rounded-xl my-[5px] border-[var(--bg-lighter)] bg-[var(--bg-darker)] w-full flex flex-row items-center justify-center p-2">
             <h1 className="max-w-[25vw] text-center w-full mx-2">{text.title}</h1>
-            <div className="cursor-pointer ml-auto" onClick={() => { }}>
-                <EllipsisVertical size={20} />
+            <div className="z-3 cursor-pointer ml-auto hover:bg-[var(--bg-darker)] rounded-full p-2 duration-650"
+                onClick={(e) => { e.stopPropagation(), removeItem(index) }}>
+                <Trash size={20} />
             </div>
         </motion.div>
     );

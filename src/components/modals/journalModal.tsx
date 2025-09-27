@@ -11,7 +11,7 @@ import { useHydratedNotes, useNotesContext } from "@/contexts/notes";
 
 export default function JournalModal() {
     useHydratedNotes();
-    const { addItem, list } = useNotesContext();
+    const { updateItem, addItem, list } = useNotesContext();
 
     const [showList, setShowList] = useState(true);
     const [title, setTitle] = useState("");
@@ -20,6 +20,7 @@ export default function JournalModal() {
         <p>Have something important that you don't want to forget?
          Note it down here!</p>`
     );
+    const [currIndex, setCurrIndex] = useState<null | number>(null);
 
     useEffect(() => {
         const data = localStorage.getItem("noteTemp");
@@ -27,6 +28,13 @@ export default function JournalModal() {
             setTitle(JSON.parse(data).title);
         }
     }, [])
+
+    function updateNote(index: number) {
+        const data = list[index];
+        setTitle(data.title);
+        setContent(data.text);
+        setCurrIndex(index);
+    }
 
     return (
         <div className="flex flex-col gap-2 justify-center p-4">
@@ -39,7 +47,7 @@ export default function JournalModal() {
                         <Notebook size={20} />
                     }
                     moreClasses={`gap-2 ${showList ? 'bottomBorder' : ""}`}
-                    func={() => { setShowList(true) }}
+                    func={() => { setShowList(true); setCurrIndex(null) }}
                 />
                 <Button
                     text="Add New"
@@ -64,7 +72,7 @@ export default function JournalModal() {
                                     </h1>
                                     :
                                     list.map((task, ind) => (
-                                        <NoteMinimized text={task} key={ind} />
+                                        <NoteMinimized index={ind} text={task} key={ind} onClick={() => { setShowList(false); updateNote(ind) }} />
                                     ))
                             }
                         </AnimatePresence>
@@ -73,16 +81,29 @@ export default function JournalModal() {
                     :
                     <div className="flex flex-col items-center justify-center gap-4">
 
+                        <p className="text-sm text-[var(--fg2)]">
+                            {
+                                (currIndex !== null) ?
+                                    "Editing"
+                                    :
+                                    "New note draft"
+                            }
+                        </p>
+
                         <div className="flex flex-row items-center justify-center gap-4 w-full">
                             <h1>Title:</h1>
                             <input value={title} onChange={(e) => { setTitle(e.target.value) }} type="text" placeholder="Title of the note goes here.." className="bold settingsField p-4 w-full h-[3rem]" />
                         </div>
 
-                        <EditorBox title={title} content={content} onChange={setContent} />
+                        <EditorBox currIndex={currIndex} title={title} content={content} onChange={setContent} />
 
                         <Button
                             text="Save"
-                            func={() => { addItem(title ?? "Couldn't fetch title", content); console.log("Trying to save:", title ?? "Couldn't fetch title", content) }}
+                            func={() => {
+                                (currIndex === null) ? addItem(title ?? "Couldn't fetch title", content) :
+                                    updateItem(currIndex, title ?? "Couldn't fetch title", content);
+                                console.log("Trying to save:", title ?? "Couldn't fetch title", content)
+                            }}
                             moreClasses="gap-2 mt-2"
                             icon={
                                 <Save size={20} />
