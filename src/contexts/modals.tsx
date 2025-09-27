@@ -107,7 +107,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                             className='w-full h-8 bg-[var(--bg-darkest)] inline-flex p-1 cursor-move items-center'
                             onPointerDown={onTitleBar}
                         >
-                            <h1 className="text-[var(--fg2)] text-sm">{title}</h1>
+                            <h1 className="text-[var(--fg3)] text-sm">{title}</h1>
                             <div className='ml-auto flex items-center justify-center closeButton' onClick={() => setIsVisible(!isVisible)}>
                                 <X size={20} />
                             </div>

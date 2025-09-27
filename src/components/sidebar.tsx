@@ -7,6 +7,7 @@ import { ChevronRight, ChevronLeft, Settings, ClipboardList, Clock } from "lucid
 import { useModal } from "@/contexts/modals";
 import SettingsModal from "./modals/settingsModal";
 import JournalModal from "./modals/journalModal";
+import TodoList from "./modals/todo";
 
 export default function SideBar() {
     const { settings } = useSettings();
@@ -24,6 +25,12 @@ export default function SideBar() {
         setTitle("Journal")
         setDirection(settings.sidebarPos);
         setContent(<JournalModal />);
+        setIsVisible(!isVisible);
+    }
+    function toggleTodoModal() {
+        setTitle("Pomodoro/To-Do")
+        setDirection(settings.sidebarPos);
+        setContent(<TodoList />);
         setIsVisible(!isVisible);
     }
 
@@ -55,7 +62,7 @@ export default function SideBar() {
                     icon={
                         <Clock size={20} />
                     }
-                    func={() => { }}
+                    func={() => { toggleTodoModal() }}
                     moreClasses="my-1"
                 />
 

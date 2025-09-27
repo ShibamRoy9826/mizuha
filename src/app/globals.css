@@ -6,7 +6,8 @@
   --bg-darker: rgba(0, 0, 0, 0.2);
   --bg-darkest: rgba(0, 0, 0, 0.3);
   --fg: #ffffff;
-  --fg2: #ababab;
+  --fg2: #ededed;
+  --fg3: #ababab;
   --accent: #8caaee;
 }
 
@@ -24,7 +25,7 @@
     --bg-darker: rgba(0, 0, 0, 0.2);
     --bg-darkest: rgba(0, 0, 0, 0.3);
     --fg: #ffffff;
-    --fg2: #ababab;
+    --fg3: #ababab;
     --accent: #8caaee;
   }
 }
@@ -118,4 +119,8 @@ body {
   border-radius: 10px;
   padding: 5px;
   text-align: center;
+}
+
+.settingsField:focus {
+  outline: none;
 }
