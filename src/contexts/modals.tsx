@@ -23,7 +23,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const [isVisible, setIsVisible] = useState(false);
     const { settings } = useSettings();
 
-    const [direction, setDirection] = useState<"left" | "right" | "up" | "down">("left");
+    const [direction, setDirection] = useState<string>("left");
     const [title, setTitle] = useState("");
     const dragControls = useDragControls();
 
@@ -59,7 +59,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         }
     }, [isVisible]);
 
-    function getInitialState(direction: "left" | "right" | "up" | "down") {
+    function getInitialState(direction: string) {
         switch (direction) {
             case "left":
                 return { opacity: 0, scale: 0.5, x: "-50vw", y: "50vh" }
@@ -69,6 +69,8 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                 return { opacity: 0, scale: 0.5, x: "50vw", y: "-50vh" }
             case "down":
                 return { opacity: 0, scale: 0.5, x: "50vw", y: "150vh" }
+            default:
+                return { opacity: 0, scale: 0.5, x: "-50vw", y: "50vh" }
 
         }
     }

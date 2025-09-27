@@ -9,8 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@tiptap/react": "^3.4.4",
-    "@tiptap/starter-kit": "^3.4.4",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/extension-text-style": "^3.6.1",
+    "@tiptap/pm": "^3.6.1",
+    "@tiptap/react": "^3.6.1",
+    "@tiptap/starter-kit": "^3.6.1",
     "fs": "^0.0.1-security",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.15",

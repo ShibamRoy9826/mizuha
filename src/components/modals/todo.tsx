@@ -24,8 +24,6 @@ export default function TodoList() {
     const isMounted = useRef(false);
 
     function markComplete(index: number) {
-        console.log(list);
-        console.log("tried to complete :", list[index]);
         setList(prev => prev.filter((_, ind) => ind !== index));
     }
 
@@ -45,16 +43,12 @@ export default function TodoList() {
         const listPrev = localStorage.getItem("tasks");
         if (listPrev) {
             setList(JSON.parse(listPrev));
-            console.log("Found in localStorage!", listPrev);
-        } else {
-            console.log("Tasks were'nt present in localStorage, using empty list")
         }
     }, [])
 
     useEffect(() => {
         if (isMounted.current) {
             localStorage.setItem("tasks", JSON.stringify(list))
-            console.log("Set to localStorage: ", JSON.stringify(list));
         } else {
             isMounted.current = true;
         }

@@ -1,13 +1,13 @@
 import { useSettings } from "@/contexts/settingsData";
-import { Square } from "lucide-react";
+import { EllipsisVertical, Square } from "lucide-react";
 import { motion } from 'motion/react';
+import { note } from "@/utils/type";
 
 interface Props {
-    text: string;
-    markComplete: () => void;
+    text: note;
 }
 
-export default function Task({ text, markComplete }: Props) {
+export default function NoteMinimized({ text }: Props) {
     const { settings } = useSettings();
     return (
         <motion.div
@@ -21,11 +21,12 @@ export default function Task({ text, markComplete }: Props) {
                 opacity: 0
             }}
             transition={{ duration: settings.animTime, type: "spring" }}
-            className="min-h-10 rounded-xl my-[5px] border-[var(--lighter)] bg-[var(--bg-darker)] w-full flex items-center justify-center p-2">
-            <h1 className="max-w-[25vw] text-center w-full mx-2">{text}</h1>
-            <div className="cursor-pointer" onClick={markComplete}>
-                <Square />
+            className="min-h-10 rounded-xl my-[5px] border-[var(--lighter)] bg-[var(--bg-darker)] w-full flex flex-row items-center justify-center p-2">
+            <h1 className="max-w-[25vw] text-center w-full mx-2">{text.title}</h1>
+            <div className="cursor-pointer ml-auto" onClick={() => { }}>
+                <EllipsisVertical size={20} />
             </div>
         </motion.div>
     );
+
 }

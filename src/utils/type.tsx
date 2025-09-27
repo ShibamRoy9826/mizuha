@@ -50,3 +50,8 @@ export type CHData = {
     sfx: sfx[];
     backgrounds: background[]
 }
+
+export type note = {
+    title: string;
+    text: string;
+}
