@@ -9,7 +9,10 @@ const defaultSettings = {
     foreground: 'white',
     backgroundLighter: 'rgba(255,255,255,0.1)',
     backgroundDarker: 'rgba(0,0,0,0.5)',
-    sidebarPos: "left"
+    sidebarPos: "left",
+    clockEnabled: true,
+    searchEnabled: true,
+    searchEngine: "google"
 }
 
 type settingsContext = {

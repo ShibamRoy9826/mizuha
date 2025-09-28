@@ -14,13 +14,15 @@ function returnUrl(query: string, searchEngine: string) {
             return searchEngine + encodeURIComponent(query);
     }
 }
+
 export function SearchNow(query: string) {
     const searchEngine = localStorage.getItem("search_engine");
     let searchUrl;
     if (searchEngine) {
         searchUrl = returnUrl(query, searchEngine)
     } else {
-        searchUrl = returnUrl(query, "startpage")
+        searchUrl = returnUrl(query, "google");
+        localStorage.setItem("search_engine", "google");
     }
     const sameTab = localStorage.getItem("same_tab_search");
     if (sameTab) {

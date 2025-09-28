@@ -6,6 +6,9 @@ export type settingsType = {
     backgroundLighter: string;
     backgroundDarker: string;
     sidebarPos: string;
+    searchEngine: string;
+    clockEnabled: boolean;
+    searchEnabled: boolean;
 }
 
 export type songItem = {

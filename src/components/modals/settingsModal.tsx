@@ -1,6 +1,7 @@
 import { useSettings } from "@/contexts/settingsData"
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import RadioBtn from "../inputs/radioBtn";
+import TickBox from "../inputs/tickBox";
 
 export default function SettingsModal() {
     const { settings, setSettings } = useSettings();
@@ -12,6 +13,22 @@ export default function SettingsModal() {
     const winSpeed = useRef(settings.windowSpeed.toString());
 
     const sidebarPos = useRef(settings.sidebarPos);
+
+
+    function setClockTicked(a: boolean) {
+        setSettings(
+            {
+                ...settings,
+                clockEnabled: !settings.clockEnabled
+            })
+    }
+    function setSearchTicked(a: boolean) {
+        setSettings(
+            {
+                ...settings,
+                searchEnabled: !settings.searchEnabled
+            })
+    }
 
     function saveSettings() {
         try {
@@ -61,12 +78,38 @@ export default function SettingsModal() {
                     moreClasses="m-4"
                 />
 
-                {/* <h1 className="heading underline col-span-2">
+                <h1 className="text-center">Search Engine</h1>
+                <RadioBtn
+                    options={["google", "duckduckgo", "bing", "startpage"]}
+                    selected={settings.searchEngine}
+                    setSelected={(a: string) => {
+                        setSettings(
+                            {
+                                ...settings,
+                                searchEngine: a
+                            }
+                        );
+                        localStorage.setItem("search_engine", a);
+                    }}
+                    moreClasses="m-[0.5rem]"
+                />
+
+                <h1 className="heading underline col-span-2">
                     Modules
-                </h1> */}
+                </h1>
+                <h1 className="text-center">Clock Enabled</h1>
+                <TickBox
+                    ticked={settings.clockEnabled}
+                    setTicked={setClockTicked}
 
+                />
 
+                <h1 className="text-center">SearchBar Enabled</h1>
+                <TickBox
+                    ticked={settings.searchEnabled}
+                    setTicked={setSearchTicked}
 
+                />
 
             </div>
         </>
