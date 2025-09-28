@@ -16,6 +16,18 @@ Don't try it on mobile devices though, it would look terrible.
 - Journal, to note down anything that you think you would forget. You can also use it as a personal diary, it supports markdown.(uses [tiptap](https://tiptap.dev) )
 - Doesn't store anything on server-side, everything is on your device! or in other words, complete privacy!
 
+## Screenshots
+
+![firstImage](Screenshots/1.png)
+
+![secondImage](Screenshots/2.png)
+
+![thirdImage](Screenshots/3.png)
+
+![fourthImage](Screenshots/4.png)
+
+![fifthImage](Screenshots/5.png)
+
 ## Known issues
 
 - Issues with music playback, takes quite some time to find a song without 404 endpoints
