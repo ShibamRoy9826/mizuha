@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mizuha
+## Overview
+A glassmorphism-themed and customizable new tab application made with next.js
 
-## Getting Started
+## Demo
+You can check it out right now, over here: [https://mizuha.vercel.app](https://mizuha.vercel.app)
 
-First, run the development server:
+Don't try it on mobile devices though, it would look terrible.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- Super smooth animations, thanks to [motion](https://motion.dev)
+- Customizable, you can toggle modules, animation speeds, etc.
+- Not cluttered, and you can remove/hide stuff that you don't like!
+- Lofi-music playback from [chillhop](https://chillhop.com)
+- To-Do list/Pomodoro timer, to improve productivity
+- Journal, to note down anything that you think you would forget. You can also use it as a personal diary, it supports markdown.(uses [tiptap](https://tiptap.dev) )
+- Doesn't store anything on server-side, everything is on your device! or in other words, complete privacy!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Known issues
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Issues with music playback, takes quite some time to find a song without 404 endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
+- Next.JS
+- Vercel
+    
+## FAQ
+### 1. What's new with this new tab?
+Looks, customizability and productivity! I just tried to make something that has totally different vibes compared to other new tab apps. I also like to listen lofi-songs in my free time, so I made a new tab page that has a lofi-music player in-built:)
 
-## Learn More
+### 2. What features are you going to add in the future?
+I have a lot of stuff in my mind. I can make a lot more customizable, by adding color customizability, few more modules like daily quotes, website shortcuts,
+and many wallpapers from chillhop itself. Honestly I feel that I should have made the website shortcuts thing at least, but I am moving towards a really tight schedule, so that's for some other day.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Music isn't playing, or buffering too much, what should I do?
+Try reloading or hard reloading, or maybe try changing the station. I honestly don't know why chillhop api returns so many 404 endpoints, but I will do more research on it later on, till then, that's what you can do.... OR You can make the fix yourself and send a PR! I would happily review the code ASAP.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ ## Credits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I am truly grateful to [SrIzan](https://srizan.dev) for making [lofi.srizan.dev](lofi.srizan.dev), it was my inspiration for this project.
+I would also like to acknowledge [chillhop](https://chillhop.com) for providing songs for this project.
 
-## Deploy on Vercel
+>  Please go and show some love to SrIzan by starring their lofi github repo :3
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contribution
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You can contribute by raising an issue or making a pull request, I will happily review them and merge them as soon as possible:)
+> If you like this app, please star this repo, that will motivate me to develop it further! ✨
