@@ -1,6 +1,6 @@
 "use client"
 import { usePlayer } from "@/contexts/player"
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../inputs/button";
 import { Volume, Volume1, Volume2 } from "lucide-react";
 import { AnimatePresence, motion } from 'motion/react';
@@ -10,8 +10,23 @@ export default function VolumeSlider() {
     const [isVisible, setIsVisible] = useState(false);
     const { settings } = useSettings();
     const { volume, setVolume } = usePlayer();
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    function focusOut(evt: MouseEvent) {
+        if (dropdownRef.current && !dropdownRef.current.contains(evt.target as Node)) {
+            setIsVisible(false);
+        }
+    }
+    useEffect(() => {
+        document.addEventListener("mousedown", focusOut)
+        return () => {
+            document.removeEventListener("mousedown", focusOut);
+        }
+    }, [])
+
     return (
-        <div className="relative inline-block ">
+        <div className="relative inline-block " ref={dropdownRef}>
             <Button
                 icon={
                     (volume <= 0.3) ?

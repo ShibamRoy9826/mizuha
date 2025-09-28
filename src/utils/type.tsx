@@ -47,7 +47,7 @@ export type sfx = {
 
 export type CHData = {
     stations: station[];
-    sfx: sfx[];
+    atmospheres: sfx[];
     backgrounds: background[]
 }
 

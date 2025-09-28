@@ -7,7 +7,6 @@ import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
 import BgModal from "./modals/bgModal";
 import StationModal from "./modals/stationModal";
-import SfxModal from "./modals/sfxModal";
 import CurrentSong from "./currentSong";
 import { usePlayer } from "@/contexts/player";
 import VolumeSlider from "./dropdowns/volumeSlider";
@@ -33,12 +32,6 @@ export default function BottomBar() {
         setIsVisible(!isVisible);
     }
 
-    function toggleSfx() {
-        setTitle("Sounds Effects");
-        setDirection("down");
-        setContent(<SfxModal />);
-        setIsVisible(!isVisible);
-    }
 
     return (
         <>
@@ -81,13 +74,7 @@ export default function BottomBar() {
                         func={() => { toggleBgModal() }}
                         moreClasses="mx-1"
                     />
-                    <Button
-                        icon={
-                            <AudioWaveform size={20} />
-                        }
-                        func={() => { toggleSfx() }}
-                        moreClasses="mx-1"
-                    />
+
                     <Button
                         icon={
                             <Radio size={20} />

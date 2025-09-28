@@ -8,7 +8,7 @@
   --fg: #ffffff;
   --fg2: #ededed;
   --fg3: #ababab;
-  --accent: #8caaee;
+  --accent: #ffffff;
 }
 
 @theme inline {
@@ -26,7 +26,7 @@
     --bg-darkest: rgba(0, 0, 0, 0.3);
     --fg: #ffffff;
     --fg3: #ababab;
-    --accent: #8caaee;
+    --accent: #ffffff;
   }
 }
 

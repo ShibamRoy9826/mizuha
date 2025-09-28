@@ -1,16 +1,29 @@
 import { CHData } from "./type";
+import { station, songItem } from "./type";
 
 export async function getStationSongs(stationId: number) {
-    const response = await fetch(`/api/stream/${stationId}`)
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(`/api/stream/${stationId}`)
+        const data = await response.json();
+        return data as songItem[];
+    }
+    catch (e) {
+        console.log("Error occured:", e);
+        return [] as songItem[];
+    }
 }
 
 export async function getStations() {
-    const res = await fetch('/api/stations');
-    if (!res.ok) console.log("Couldn't fetch stations");
-    const data = (await res.json()) as CHData;
-    return data;
+    try {
+        const res = await fetch('/api/stations');
+        if (!res.ok) console.log("Couldn't fetch stations");
+        const data = (await res.json()) as CHData;
+        return data;
+    }
+    catch (e) {
+        console.log("Error occured:", e);
+        return {} as CHData;
+    }
 }
 
 export async function getCHData() {
@@ -18,9 +31,9 @@ export async function getCHData() {
 
     try {
         const data = await response.json();
-        return data;
+        return data as CHData;
     } catch (e) {
         console.log("error:", e)
-        return undefined;
+        return {} as CHData;
     }
 }

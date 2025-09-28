@@ -10,7 +10,7 @@ export default function Clock() {
         return () => clearInterval(interval);
     }, [])
 
-    const hour = ((time.getHours() % 12)).toString().padStart(2, "0");
+    const hour = ((time.getHours() % 12 || 12)).toString().padStart(2, "0");
     const minute = time.getMinutes().toString().padStart(2, "0");
     const ampm = time.getHours() >= 12 ? "PM" : "AM"
 
