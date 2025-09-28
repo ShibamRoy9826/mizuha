@@ -78,7 +78,6 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!currStation) return;
         getSongs();
-        togglePlayback(true);
     }, [currStation])
 
     useEffect(() => {
