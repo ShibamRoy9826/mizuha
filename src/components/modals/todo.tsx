@@ -29,8 +29,12 @@ export default function TodoList() {
 
     function addTask() {
         const val = taskInputRef.current?.value;
+
         if (val) {
             setList([...list, val]);
+            if (taskInputRef.current) {
+                taskInputRef.current.value = "";
+            }
         }
     }
     function onKeydown(e: React.KeyboardEvent<HTMLInputElement>) {

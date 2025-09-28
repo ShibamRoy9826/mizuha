@@ -40,7 +40,6 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     // playback state hook
     useEffect(() => {
         if (!audioRef.current) return;
-
         // cause it updates on next render
         if (playing) {
             audioRef.current.play().catch(e => console.log(e));
@@ -70,7 +69,6 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
     // sets song whenn the queue changes
     useEffect(() => {
-        console.log("Queue", queue);
         if (queue.length > 0) {
             setSong(qIndex.current);
         }
@@ -83,6 +81,14 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         togglePlayback(true);
     }, [currStation])
 
+    useEffect(() => {
+        if (!audioRef.current || !currSong) return;
+        if (audioRef.current.src !== currSong.endpoint) {
+            audioRef.current.src = currSong.endpoint;
+            audioRef.current.play().catch(e => console.log(e));
+        }
+    }, [currSong])
+
 
     // Functions----------------------------------------------------------------
     function togglePlayback(a: boolean) {
@@ -94,43 +100,17 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         setSong(qIndex.current);
 
     }
-    // async function testUrl(url: string) {
-    //     try {
-    //         const req = await fetch(url, { method: "HEAD", mode: "no-cors" });
-    //         console.log("probably valid url", req.status, req.ok);
-    //         return req.status !== 404;
-    //     } catch (e) {
-    //         console.log("Invalid url", e);
-    //         return false;
-    //     }
-    // }
-
-    // async function getProxyUrl(songUrl: string) {
-    //     const req = await fetch(`/api/proxy/${encodeURIComponent(songUrl)}`);
-    //     const data = (await req.json()) as string;
-    //     return data;
-    // }
 
     async function setSong(index: number) {
+        console.log("New song set, index", index)
         if (qIndex.current >= queue.length) {
             await getSongs();
             return;
         }
-        console.log("Checking index: ", index, "queue", queue);
         const song = queue[index];
         const url = song.endpoint;
-
-        // const works = await testUrl(url)
-
-        // if (works) {
         setCurrSong(song);
         qIndex.current = index;
-        console.log("It works!!");
-        // } else {
-        //     qIndex.current += 1;
-        //     setSong(qIndex.current);
-        //     console.log("That didn't work...", qIndex.current);
-        // }
     }
 
     async function getSongs() {
@@ -159,6 +139,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
                 ref={audioRef}
                 src={currSong?.endpoint}
                 className="hidden"
+                preload="auto"
                 onEnded={handleSongEnd}
                 onError={handleSongEnd}
                 onCanPlay={startPlaying}
