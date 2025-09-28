@@ -26,7 +26,6 @@ Don't try it on mobile devices though, it would look terrible.
 
 ![fourthImage](Screenshots/4.png)
 
-![fifthImage](Screenshots/5.png)
 
 ## Known issues
 
