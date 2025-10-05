@@ -14,10 +14,7 @@ export default function SearchBar() {
     const [inputFocused, setInputFocused] = useState(false);
 
     const [suggestions, setSuggestions] = useState<string[]>([
-        'bla bla bla', 'hollo', 'hello world', 'asdjanskdjn'
     ])
-    // const [suggestions, setSuggestions] = useState<string[]>([])
-
 
     function onQueryChange(e: React.ChangeEvent<HTMLInputElement>) {
         setQuery(e.target.value);
@@ -38,34 +35,14 @@ export default function SearchBar() {
         }
     }
     async function sleep(duration: number) {
-        return new Promise(resolve => setTimeout(resolve, duration));
+        return new Promise(resolve => setTimeout(resolve, duration * 1000));
     }
 
     async function getSuggestions(query: string) {
-        await sleep(1);
-        // const url = "http://suggestqueries.google.com/complete/search"
-        // const params = {
-        //     "hl": "en",
-        //     "q": query
-        // };
-        // const headers = {
-        //     'User-Agent': 'Mozilla/5.0',
-        // }
-        // const searchParams = new URLSearchParams(params).toString();
-        // const fullUrl = `${url}?${searchParams}`;
-
-        // console.log(fullUrl);
-
-        // try {
-        //     const req = await fetch(fullUrl, {
-        //         headers: headers
-        //     });
-        //     const data = await req.json();
-        //     console.log(data)
-        //     return data;
-        // } catch (e) {
-        //     console.log("Couldn't fetch suggestions", e);
-        // }
+        await sleep(0.5);
+        const res = await fetch(`/api/search/${encodeURIComponent(query)}`)
+        const data = (await res.json());
+        setSuggestions(data[1]);
     }
 
     useEffect(() => {
