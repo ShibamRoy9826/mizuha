@@ -9,7 +9,7 @@ type modalContextType = {
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
     setDirection: React.Dispatch<React.SetStateAction<string>>;
     isVisible: boolean;
-    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    setTitle: (a: string) => void;
 }
 
 const ModalContext = createContext<modalContextType | null>(null);
@@ -24,9 +24,12 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const { settings } = useSettings();
 
     const [direction, setDirection] = useState<string>("left");
-    const [title, setTitle] = useState("");
+    const [title, setT] = useState("");
     const dragControls = useDragControls();
 
+    function setTitle(a: string) {
+        setT(a);
+    }
     function updateWindowSize() {
         windowSize.current = { width: window.innerWidth, height: window.innerHeight };
     }

@@ -14,26 +14,12 @@ export default function SideBar() {
     const [isSidebarVisible, setVisible] = useState(true);
     const { setContent, setIsVisible, isVisible, setDirection, setTitle } = useModal();
 
-    function toggleSettingsModal() {
-        setTitle("Settings")
+    function toggleModal(title: string, content: React.ReactNode) {
+        setTitle(title);
         setDirection(settings.sidebarPos);
-        setContent(<SettingsModal />);
+        setContent(content);
         setIsVisible(!isVisible);
     }
-
-    function toggleJournalModal() {
-        setTitle("Journal")
-        setDirection(settings.sidebarPos);
-        setContent(<JournalModal />);
-        setIsVisible(!isVisible);
-    }
-    function toggleTodoModal() {
-        setTitle("Pomodoro/To-Do")
-        setDirection(settings.sidebarPos);
-        setContent(<TodoList />);
-        setIsVisible(!isVisible);
-    }
-
 
     return (
         <>
@@ -46,7 +32,7 @@ export default function SideBar() {
                     icon={
                         <Settings size={20} />
                     }
-                    func={() => { toggleSettingsModal() }}
+                    func={() => { toggleModal("Settings", <SettingsModal />) }}
                     moreClasses="my-1"
                 />
 
@@ -55,14 +41,14 @@ export default function SideBar() {
                     icon={
                         <ClipboardList size={20} />
                     }
-                    func={() => { toggleJournalModal() }}
+                    func={() => { toggleModal("Journal", <JournalModal />) }}
                     moreClasses="my-1"
                 />
                 <Button
                     icon={
                         <Clock size={20} />
                     }
-                    func={() => { toggleTodoModal() }}
+                    func={() => { toggleModal("To-do/Pomodoro", <TodoList />) }}
                     moreClasses="my-1"
                 />
 
