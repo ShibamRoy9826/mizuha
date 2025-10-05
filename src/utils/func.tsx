@@ -15,7 +15,31 @@ function returnUrl(query: string, searchEngine: string) {
     }
 }
 
+function appendHttp(val: string) {
+    const url = (val.startsWith("https://") || val.startsWith("http://")) ?
+        val : `https://${val}`;
+    return url;
+}
+
+function isValidUrl(val: string) {
+    const pattern = /^[^\s]+\.[^\s]+$/;
+    return pattern.test(val);
+}
+
+export function openUrl(url: string) {
+    const sameTab = localStorage.getItem("same_tab_search");
+    if (sameTab) {
+        window.location.href = url;
+    } else {
+        window.open(url, "_blank", "noopener,noreferrer")
+    }
+}
 export function SearchNow(query: string) {
+    if (isValidUrl(query)) {
+        openUrl(appendHttp(query));
+    } else {
+
+    }
     const searchEngine = localStorage.getItem("search_engine");
     let searchUrl;
     if (searchEngine) {
@@ -24,10 +48,5 @@ export function SearchNow(query: string) {
         searchUrl = returnUrl(query, "google");
         localStorage.setItem("search_engine", "google");
     }
-    const sameTab = localStorage.getItem("same_tab_search");
-    if (sameTab) {
-        window.location.href = searchUrl;
-    } else {
-        window.open(searchUrl, "_blank", "noopener,noreferrer")
-    }
+    openUrl(searchUrl);
 }
