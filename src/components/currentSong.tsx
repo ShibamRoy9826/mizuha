@@ -12,7 +12,7 @@ export default function CurrentSong({ name, image, artists }: Props) {
             <div className="relative h-15 w-15 flex flex-row items-center justify-center rounded-xl overflow-hidden">
                 <Image
                     src={image}
-                    alt="music image"
+                    alt="music image blur-sm transition duration-500"
                     style={{ objectFit: "fill" }}
                     fill
                 />

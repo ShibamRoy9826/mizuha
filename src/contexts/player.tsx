@@ -15,7 +15,7 @@ type playerContextType = {
     currStation: station | undefined;
     setCurrStation: React.Dispatch<React.SetStateAction<station | undefined>>;
     togglePlayback: (a: boolean) => void;
-    setVolume: React.Dispatch<React.SetStateAction<number>>;
+    setVolume: (a: number) => void;
     setCurrSong: React.Dispatch<React.SetStateAction<songItem | undefined>>;
 
 }
@@ -30,14 +30,14 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const qIndex = useRef(0);
 
     const [playing, setPlaying] = useState(false);
-    const [volume, setVolume] = useState(1);
+    const [volume, setVol] = useState(1);
 
     const [stations, setStations] = useState<station[]>([]);
     const [currStation, setCurrStation] = useState<station>();
 
     const [currSong, setCurrSong] = useState<songItem>()
 
-    const { bgList, addBgList } = useBg();
+    const { addBgList } = useBg();
 
     // Use effect hooks- ---------------------------------------------------
     // playback state hook
@@ -51,7 +51,14 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         }
     }, [playing])
 
-    //volume hook
+    //volume hooks
+    useEffect(() => {
+        const vol = localStorage.getItem("volume");
+        if (vol) {
+            setVolume(parseFloat(vol));
+        }
+    }, [])
+
     useEffect(() => {
         if (!audioRef.current) return;
         audioRef.current.volume = volume;
@@ -104,6 +111,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
 
     // Functions----------------------------------------------------------------
+    function setVolume(a: number) {
+        setVol(a);
+        localStorage.setItem("volume", a.toString());
+    }
     function togglePlayback(a: boolean) {
         setPlaying(a);
     }
