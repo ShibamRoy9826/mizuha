@@ -6,14 +6,14 @@ export default function Background() {
 
     return (
         <video
-            key={currBg}
+            key={currBg?.videoSrc}
             autoPlay
             muted
             loop
             playsInline
             className="absolute top-0 left-0 w-full h-full object-cover -z-1"
         >
-            <source src={currBg} type="video/mp4" />
+            <source src={currBg?.videoSrc} type="video/mp4" />
         </video>
 
 

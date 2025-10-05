@@ -1,9 +1,10 @@
 'use client';
 import React, { createContext, useContext, useRef, useState, useEffect } from "react";
-import { songItem } from "@/utils/type";
+import { background, localBg, songItem } from "@/utils/type";
 import { station } from "@/utils/type";
 import { getStations } from "@/utils/chillhopUtils";
 import { getStationSongs } from "@/utils/chillhopUtils";
+import { useBg } from "./background";
 
 
 type playerContextType = {
@@ -36,6 +37,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
     const [currSong, setCurrSong] = useState<songItem>()
 
+    const { bgList, addBgList } = useBg();
+
     // Use effect hooks- ---------------------------------------------------
     // playback state hook
     useEffect(() => {
@@ -58,6 +61,17 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         getStations().then((d) => {
             setStations(d.stations);
+
+            const backgrounds: background[] = d.backgrounds;
+            if (backgrounds) {
+
+                const bgs: localBg[] = backgrounds.map(bg => ({
+                    thumbnail: bg.thumbnailUrl,
+                    videoSrc: bg.landscapeUrl
+                }));
+                addBgList(bgs);
+            }
+
             const savedStation = localStorage.getItem("station")
             if (savedStation) {
                 setCurrStation(JSON.parse(savedStation));

@@ -58,3 +58,8 @@ export type note = {
     title: string;
     text: string;
 }
+
+export type localBg = {
+    videoSrc: string;
+    thumbnail: string;
+}

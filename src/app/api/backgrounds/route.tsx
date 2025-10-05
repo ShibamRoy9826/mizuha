@@ -10,7 +10,12 @@ export async function GET() {
         const fullPath = path.join(pathDir, entry);
         return fs.statSync(fullPath).isFile();
     })
-    const paths = files.map(f => `/backgrounds/${f}`);
+    const paths = files.map(f => {
+        const mp4 = `/backgrounds/${f}`;
+        const png = mp4.replace("backgrounds/", "backgrounds/thumbnails/").replace(".mp4", ".png")
+        return [mp4, png]
+    });
+
     return NextResponse.json(
         paths,
         {
