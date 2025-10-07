@@ -1,16 +1,18 @@
 'use client';
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
+// it also handles sound effects..
 type TimeType = {
     timer: number;
     time: number;
-    setTimer: (a: number) => void,
+    setTimer: (a: number) => void;
     start: () => void;
     pause: () => void;
     reset: () => void;
     running: boolean;
     done: boolean;
     type: string;
+    playSfx: (sfx: string) => void;
 }
 
 const TimeContext = createContext<TimeType | null>(null);
@@ -19,6 +21,8 @@ let interval: ReturnType<typeof setInterval> | null = null;
 
 export function TimeProvider({ children }: { children: React.ReactNode }) {
     const audioRef = useRef<HTMLAudioElement>(null);
+    const sfxRef = useRef<HTMLAudioElement>(null);
+
     const [done, setDone] = useState(false);
     const [running, setRunning] = useState(false);
     const [time, setTime] = useState(0);
@@ -55,6 +59,22 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
         }
     }, [done, type])
 
+    function playSfx(sfx: string) {
+        if (sfxRef.current) {
+            switch (sfx) {
+                case "pop":
+                    sfxRef.current.src = "/audio/create.mp3";
+                    sfxRef.current.currentTime = 0;
+                    sfxRef.current.play();
+                    break;
+                case "unpop":
+                    sfxRef.current.src = "/audio/delete.mp3";
+                    sfxRef.current.currentTime = 0;
+                    sfxRef.current.play();
+                    break;
+            }
+        }
+    }
     function start() {
         if (done) reset();
         if (running) return;
@@ -99,6 +119,7 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
             audioRef.current.currentTime = 0;
         }
     }
+
     return (
         <TimeContext.Provider value={
             {
@@ -106,11 +127,14 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
                 setTimer,
                 start,
                 pause,
-                reset, running, done, timer, type
+                reset, running, done, timer, type,
+                playSfx
             }
         }>
 
-            <audio src={"/audio/alarm.wav"} ref={audioRef} />
+            <audio hidden src={"/audio/alarm.wav"} ref={audioRef} />
+
+            <audio hidden src={"/audio/delete.mp3"} ref={sfxRef} />
             {children}
         </TimeContext.Provider >
     )

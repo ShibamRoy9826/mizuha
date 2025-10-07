@@ -15,23 +15,19 @@ export default function BottomBar() {
     const { settings } = useSettings();
     const [isBBVisible, setVisible] = useState(true);
 
-    const { setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
+    const { currTitle, setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
     const { playing, currSong, togglePlayback } = usePlayer();
 
-    function toggleBgModal() {
-        setTitle("Backgrounds");
-        setDirection("down");
-        setContent(<BgModal />);
-        setIsVisible(!isVisible);
+    function toggleModal(title: string, content: React.ReactNode) {
+        setTitle(title);
+        setDirection(settings.sidebarPos);
+        setContent(content);
+        if (title !== currTitle && isVisible) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(!isVisible);
+        }
     }
-
-    function toggleStation() {
-        setTitle("Stations");
-        setDirection("down");
-        setContent(<StationModal />);
-        setIsVisible(!isVisible);
-    }
-
 
     return (
         <>
@@ -71,7 +67,7 @@ export default function BottomBar() {
                         icon={
                             <Image size={20} />
                         }
-                        func={() => { toggleBgModal() }}
+                        func={() => { toggleModal("Backgrounds", <BgModal />) }}
                         moreClasses="mx-1"
                     />
 
@@ -79,7 +75,7 @@ export default function BottomBar() {
                         icon={
                             <Radio size={20} />
                         }
-                        func={() => { toggleStation() }}
+                        func={() => { toggleModal("Stations", <StationModal />) }}
                         moreClasses="mx-1"
                     />
                     <Button

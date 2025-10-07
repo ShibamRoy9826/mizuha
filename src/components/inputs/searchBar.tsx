@@ -86,9 +86,9 @@ export default function SearchBar() {
                                             suggestions.map((item, index) => (
                                                 <div
                                                     key={index}
-                                                    onClick={() => { setQuery(item); SearchNow(item); console.log("called") }}
+                                                    onMouseDown={() => { setQuery(item); SearchNow(item); }}
                                                     className='flex flex-row px-8 duration-200 hover:bg-[var(--bg-darkest)] 
-                                                    cursor-pointer p-1 border-1 border-[var(--bg-darker)]
+                                                    cursor-pointer p-1 border-1 border-[var(--bg-darker)] 
                                                     '>
                                                     <SearchIcon size={18} />
                                                     <h1 className='ml-8 flex text-center w-full'>

@@ -10,6 +10,7 @@ type modalContextType = {
     setDirection: React.Dispatch<React.SetStateAction<string>>;
     isVisible: boolean;
     setTitle: (a: string) => void;
+    currTitle: string;
 }
 
 const ModalContext = createContext<modalContextType | null>(null);
@@ -24,7 +25,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const { settings } = useSettings();
 
     const [direction, setDirection] = useState<string>("left");
-    const [title, setT] = useState("");
+    const [currTitle, setT] = useState("");
     const dragControls = useDragControls();
 
     function setTitle(a: string) {
@@ -86,7 +87,8 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                 setContent,
                 isVisible,
                 setDirection,
-                setTitle
+                setTitle,
+                currTitle
             }
         }>
             <AnimatePresence>
@@ -112,7 +114,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                             className='w-full h-8 bg-[var(--bg-darkest)] inline-flex p-1 cursor-move items-center'
                             onPointerDown={onTitleBar}
                         >
-                            <h1 className="text-[var(--fg3)] text-sm">{title}</h1>
+                            <h1 className="text-[var(--fg3)] text-sm">{currTitle}</h1>
                             <div className='ml-auto flex items-center justify-center closeButton' onClick={() => setIsVisible(!isVisible)}>
                                 <X size={20} />
                             </div>

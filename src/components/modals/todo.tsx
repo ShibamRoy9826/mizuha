@@ -9,7 +9,7 @@ import { useTime } from "@/contexts/timers";
 
 export default function TodoList() {
     const [list, setList] = useState<string[]>([]);
-    const { time, running, start, pause, reset, type, timer } = useTime();
+    const { playSfx, time, running, start, pause, reset, type, timer } = useTime();
 
     const hours = Math.floor(time / 3600).toString().padStart(2, "0");
     const minutes = Math.floor(time / 60).toString().padStart(2, "0");
@@ -29,9 +29,9 @@ export default function TodoList() {
 
     function addTask() {
         const val = taskInputRef.current?.value;
-
         if (val) {
             setList([...list, val]);
+            playSfx("unpop");
             if (taskInputRef.current) {
                 taskInputRef.current.value = "";
             }
@@ -107,7 +107,7 @@ export default function TodoList() {
                             </h1>
                             :
                             list.map((task, ind) => (
-                                <Task text={task} markComplete={() => { markComplete(ind) }} key={ind} />
+                                <Task text={task} markComplete={() => { markComplete(ind); playSfx("pop") }} key={ind} />
                             ))
                     }
                 </AnimatePresence>
