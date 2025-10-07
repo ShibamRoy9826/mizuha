@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useRef, createContext, useContext, useEffect, useState } from "react";
 import { localBg } from "@/utils/type";
 
 
@@ -15,6 +15,7 @@ const BgContext = createContext<bgContextType | undefined>(undefined);
 export function BgProvider({ children }: { children: React.ReactNode }) {
     const [bgList, setBgList] = useState<localBg[]>([]);
     const [currBg, setCBg] = useState<localBg | undefined>(undefined);
+    const setDefault = useRef(false);
 
     function setCurrBg(bg: localBg | undefined) {
         setCBg(bg);
@@ -24,23 +25,22 @@ export function BgProvider({ children }: { children: React.ReactNode }) {
         }
     }
     async function loadBackgrounds() {
-        const res = await fetch("/api/backgrounds");
-        const list: localBg[] = await res.json();
-
-        setBgList(list);
-
         const background = localStorage.getItem("background");
 
         if (background) {
             setCBg(JSON.parse(background));
         } else {
-            setCurrBg(list[0]);
+            setDefault.current = true;
         }
     }
 
     function addBgList(bgs: localBg[]) {
-        setBgList([...bgList, ...bgs])
-        console.log([...bgList, ...bgs]);
+        const data = [...bgList, ...bgs]
+        setBgList(data)
+        if (setDefault.current) {
+            setCurrBg(data[Math.floor(Math.random() * data.length)])
+            setDefault.current = false;
+        }
     }
     useEffect(() => {
         loadBackgrounds();

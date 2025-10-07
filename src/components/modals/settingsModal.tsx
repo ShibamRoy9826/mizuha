@@ -19,14 +19,14 @@ export default function SettingsModal() {
         setSettings(
             {
                 ...settings,
-                clockEnabled: !settings.clockEnabled
+                clockEnabled: a
             })
     }
     function setSearchTicked(a: boolean) {
         setSettings(
             {
                 ...settings,
-                searchEnabled: !settings.searchEnabled
+                searchEnabled: a
             })
     }
 
@@ -52,7 +52,7 @@ export default function SettingsModal() {
                 console.log("typeof winSpeed", typeof winSpeed);
             }
         } catch (e) {
-            console.log("Check all fields, one of them isn't a number")
+            console.log("Check all fields, one of them isn't a number", e)
         }
     }
 

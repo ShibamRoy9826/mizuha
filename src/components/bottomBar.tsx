@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/inputs/button"
 import { motion } from 'motion/react';
-import { AudioWaveform, ChevronDown, ChevronUp, Image, Pause, Play, Radio } from "lucide-react";
+import { ChevronDown, ChevronUp, Image, Pause, Play, Radio } from "lucide-react";
 import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
@@ -15,19 +15,8 @@ export default function BottomBar() {
     const { settings } = useSettings();
     const [isBBVisible, setVisible] = useState(true);
 
-    const { currTitle, setTitle, setContent, setIsVisible, isVisible, setDirection } = useModal();
+    const { toggleModal } = useModal();
     const { playing, currSong, togglePlayback } = usePlayer();
-
-    function toggleModal(title: string, content: React.ReactNode) {
-        setTitle(title);
-        setDirection(settings.sidebarPos);
-        setContent(content);
-        if (title !== currTitle && isVisible) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(!isVisible);
-        }
-    }
 
     return (
         <>

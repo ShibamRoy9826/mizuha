@@ -1,5 +1,5 @@
 import { Square, SquareCheck } from "lucide-react"
-import React, { useState } from "react";
+import React from "react";
 
 interface Props {
     ticked: boolean;

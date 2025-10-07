@@ -1,5 +1,5 @@
 import { useSettings } from "@/contexts/settingsData";
-import { Delete, EllipsisVertical, Square, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { motion } from 'motion/react';
 import { note } from "@/utils/type";
 import { useHydratedNotes, useNotesContext } from "@/contexts/notes";

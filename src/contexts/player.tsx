@@ -132,7 +132,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
             return;
         }
         const song = queue[index];
-        const url = song.endpoint;
+        // const url = song.endpoint;
         setCurrSong(song);
         qIndex.current = index;
     }

@@ -1,5 +1,5 @@
 import { CHData } from "./type";
-import { station, songItem } from "./type";
+import { songItem } from "./type";
 
 export async function getStationSongs(stationId: number) {
     try {

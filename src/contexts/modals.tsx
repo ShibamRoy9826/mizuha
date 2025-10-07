@@ -1,10 +1,11 @@
 'use client';
 import React, { useRef, createContext, useContext, useEffect, useState } from "react";
-import { Settings, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { AnimatePresence, motion, useDragControls } from 'motion/react';
 import { useSettings } from "./settingsData";
 
 type modalContextType = {
+    toggleModal: (title: string, content: React.ReactNode) => void;
     setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
     setDirection: React.Dispatch<React.SetStateAction<string>>;
@@ -80,9 +81,21 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     }
 
 
+    function toggleModal(title: string, content: React.ReactNode) {
+        setTitle(title);
+        setDirection(settings.sidebarPos);
+        setContent(content);
+        if (title !== currTitle && isVisible) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(!isVisible);
+        }
+    }
+
     return (
         <ModalContext.Provider value={
             {
+                toggleModal,
                 setIsVisible,
                 setContent,
                 isVisible,
