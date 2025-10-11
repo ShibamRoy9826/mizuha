@@ -1,15 +1,17 @@
 "use client";
 import Button from "@/components/inputs/button"
 import { motion } from 'motion/react';
-import { ChevronDown, ChevronUp, Image, Pause, Play, Radio } from "lucide-react";
+import { ChevronDown, ChevronUp, Image, MessageSquareText, Pause, Play, Radio, Star } from "lucide-react";
 import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
 import BgModal from "./modals/bgModal";
+import FeedbackModal from "./modals/feedbackModal";
 import StationModal from "./modals/stationModal";
 import CurrentSong from "./currentSong";
 import { usePlayer } from "@/contexts/player";
 import VolumeSlider from "./dropdowns/volumeSlider";
+import { openUrl } from "@/utils/func";
 
 export default function BottomBar() {
     const { settings } = useSettings();
@@ -67,6 +69,22 @@ export default function BottomBar() {
                         func={() => { toggleModal("Stations", <StationModal />) }}
                         moreClasses="mx-1"
                     />
+                    <Button
+                        icon={
+                            <MessageSquareText size={20} />
+                        }
+                        func={() => { openUrl("/feedback") }}
+                        moreClasses="mx-1"
+                    />
+
+                    <Button
+                        icon={
+                            <Star size={20} />
+                        }
+                        func={() => { openUrl("https://github.com/ShibamRoy9826/mizuha") }}
+                        moreClasses="mx-1"
+                    />
+
                     <Button
                         icon={
                             <ChevronDown
