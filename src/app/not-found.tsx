@@ -3,11 +3,6 @@ import Button from "@/components/inputs/button";
 import { ArrowLeft } from "lucide-react";
 import { RedirectType, redirect } from "next/navigation";
 
-export const metadata = {
-    title: "Feedback",
-    description: "Share your thoughts about my app!",
-}
-
 export default function NotFound404() {
     return (
         <div className="glass absolute left-[50%] top-[50%] 

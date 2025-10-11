@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useSettings } from "@/contexts/settingsData";
 import { useModal } from "@/contexts/modals";
 import BgModal from "./modals/bgModal";
-import FeedbackModal from "./modals/feedbackModal";
 import StationModal from "./modals/stationModal";
 import CurrentSong from "./currentSong";
 import { usePlayer } from "@/contexts/player";
