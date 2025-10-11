@@ -2,6 +2,7 @@ import { useSettings } from "@/contexts/settingsData"
 import { useRef } from "react";
 import RadioBtn from "../inputs/radioBtn";
 import TickBox from "../inputs/tickBox";
+import HeadingText from "../containers/headings";
 
 export default function SettingsModal() {
     const { settings, setSettings } = useSettings();
@@ -60,9 +61,9 @@ export default function SettingsModal() {
     return (
         <>
             <div className="grid grid-cols-2 p-4 gap-2 ">
-                <h1 className="heading underline col-span-2 w-full ">
+                <HeadingText>
                     General
-                </h1>
+                </HeadingText>
 
                 <h1 className="text-center">Animation speed(seconds)</h1>
                 <input type="number" value={animSpeed.current} onChange={(e) => { animSpeed.current = e.target.value; saveSettings() }} className="settingsField" />
@@ -94,9 +95,10 @@ export default function SettingsModal() {
                     moreClasses="m-[0.5rem]"
                 />
 
-                <h1 className="heading underline col-span-2">
+                <HeadingText>
                     Modules
-                </h1>
+                </HeadingText>
+
                 <h1 className="text-center">Clock Enabled</h1>
                 <TickBox
                     ticked={settings.clockEnabled}
