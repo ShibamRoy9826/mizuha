@@ -15,6 +15,7 @@ export default function SideBar() {
     const { toggleModal } = useModal();
 
 
+
     return (
         <>
             <motion.div

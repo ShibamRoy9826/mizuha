@@ -12,7 +12,8 @@ const defaultSettings = {
     sidebarPos: "left",
     clockEnabled: true,
     searchEnabled: true,
-    searchEngine: "google"
+    searchEngine: "google",
+    showMiniTimer: false
 }
 
 type settingsContext = {

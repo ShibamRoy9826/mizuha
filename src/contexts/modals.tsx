@@ -3,6 +3,8 @@ import React, { useRef, createContext, useContext, useEffect, useState } from "r
 import { X } from 'lucide-react';
 import { AnimatePresence, motion, useDragControls } from 'motion/react';
 import { useSettings } from "./settingsData";
+import MiniTimer from "@/components/containers/miniTimer";
+import { useTime } from "./timers";
 
 type modalContextType = {
     toggleModal: (title: string, content: React.ReactNode) => void;
@@ -27,6 +29,10 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 
     const [direction, setDirection] = useState<string>("left");
     const [currTitle, setT] = useState("");
+
+    const { timer, time } = useTime();
+    const [showMini, setShowMini] = useState(false);
+
     const dragControls = useDragControls();
 
     function setTitle(a: string) {
@@ -57,10 +63,18 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
             height: modalRef.current ? modalRef.current.offsetHeight : 0
         };
         if (isVisible) {
+            if (currTitle === "To-do/Pomodoro") {
+                setShowMini(false);
+            }
             setPos({
                 x: (windowSize.current.width - elementSize.current.width) / 2,
                 y: (windowSize.current.height - elementSize.current.height) / 2
             });
+        } else {
+            if (currTitle === "To-do/Pomodoro") {
+                setShowMini(true);
+            }
+
         }
     }, [isVisible]);
 
@@ -80,11 +94,11 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         }
     }
 
-
     function toggleModal(title: string, content: React.ReactNode) {
         setTitle(title);
         setDirection(settings.sidebarPos);
         setContent(content);
+
         if (title !== currTitle && isVisible) {
             setIsVisible(true);
         } else {
@@ -104,6 +118,9 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                 currTitle
             }
         }>
+
+            <MiniTimer time={time} timerTime={timer} isVisible={showMini} />
+
             <AnimatePresence>
                 {
                     isVisible &&
@@ -128,7 +145,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
                             onPointerDown={onTitleBar}
                         >
                             <h1 className="text-[var(--fg3)] text-sm">{currTitle}</h1>
-                            <div className='ml-auto flex items-center justify-center closeButton' onClick={() => setIsVisible(!isVisible)}>
+                            <div className='ml-auto flex items-center justify-center closeButton' onClick={() => { setIsVisible(!isVisible); }}>
                                 <X size={20} />
                             </div>
                         </div>

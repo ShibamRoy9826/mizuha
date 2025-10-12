@@ -120,6 +120,7 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
         }
     }
 
+
     return (
         <TimeContext.Provider value={
             {
@@ -128,13 +129,13 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
                 start,
                 pause,
                 reset, running, done, timer, type,
-                playSfx
+                playSfx,
             }
         }>
 
             <audio hidden src={"/audio/alarm.wav"} ref={audioRef} />
-
             <audio hidden src={"/audio/delete.mp3"} ref={sfxRef} />
+
             {children}
         </TimeContext.Provider >
     )

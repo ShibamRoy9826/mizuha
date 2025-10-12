@@ -106,14 +106,26 @@ export default function SettingsModal() {
 
                 />
 
+                <h1 className="text-center">Mini timer when pomodoro modal is disabled</h1>
+                <TickBox
+                    ticked={settings.showMiniTimer}
+                    setTicked={(a: boolean) => {
+                        setSettings(
+                            {
+                                ...settings,
+                                showMiniTimer: a
+                            });
+                    }}
+                />
+
+
                 <h1 className="text-center">SearchBar Enabled</h1>
                 <TickBox
                     ticked={settings.searchEnabled}
                     setTicked={setSearchTicked}
-
                 />
 
-            </div>
+            </div >
         </>
     )
 }

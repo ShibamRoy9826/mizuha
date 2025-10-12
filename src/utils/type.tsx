@@ -9,6 +9,7 @@ export type settingsType = {
     searchEngine: string;
     clockEnabled: boolean;
     searchEnabled: boolean;
+    showMiniTimer: boolean;
 }
 
 export type songItem = {
