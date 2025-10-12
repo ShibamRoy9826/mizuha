@@ -31,7 +31,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     const [currTitle, setT] = useState("");
 
     const { timer, time } = useTime();
-    const [showMini, setShowMini] = useState(false);
+    const [showMini, setShowMini] = useState(true);
 
     const dragControls = useDragControls();
 

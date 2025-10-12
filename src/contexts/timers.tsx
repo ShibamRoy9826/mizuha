@@ -31,6 +31,10 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
     const [sessionCount, setSessionCount] = useState(0);
 
     useEffect(() => {
+        getFromLocal();
+    }, [])
+
+    useEffect(() => {
         if (done) {
             audioRef.current?.play();
             if (type === "task" && sessionCount < 3) {
@@ -75,9 +79,55 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
             }
         }
     }
+    function getFromLocal() {
+        const data = localStorage.getItem("pomodoro_data");
+        if (data) {
+            const dataParsed = JSON.parse(data);
+            if (dataParsed.time && dataParsed.timer) {
+                setTime(dataParsed.time);
+                setTimer(dataParsed.timer);
+            }
+            setSessionCount(dataParsed.sessionCount);
+            setType(dataParsed.type);
+            setDone(dataParsed.done);
+            setRunning(dataParsed.running);
+
+            if (dataParsed.running && !dataParsed.done) {
+                interval = setInterval(() => {
+                    setTime(prevTime => {
+                        if (prevTime + 1 >= timer) {
+                            //don't replace with pause() in the future, look properly!
+                            setDone(true);
+                            clearInterval(interval!);
+                            interval = null;
+                            setRunning(false);
+
+                            return timer;
+                        }
+                        localBackup(prevTime + 1);
+                        return prevTime + 1;
+                    })
+                }, 1000);
+            }
+        }
+    }
+    function localBackup(t: number) {
+        console.log("took time backup", t);
+        localStorage.setItem("pomodoro_data", JSON.stringify(
+            {
+                time: t,
+                timer: timer,
+                sessionCount: sessionCount,
+                type: type,
+                done: done,
+                running: running
+            }
+        ))
+    }
     function start() {
         if (done) reset();
         if (running) return;
+        if (interval) clearInterval(interval);
         setRunning(true);
         setDone(false);
 
@@ -89,9 +139,9 @@ export function TimeProvider({ children }: { children: React.ReactNode }) {
                     clearInterval(interval!);
                     interval = null;
                     setRunning(false);
-
                     return timer;
                 }
+                localBackup(prevTime + 1);
                 return prevTime + 1;
             })
         }, 1000);
